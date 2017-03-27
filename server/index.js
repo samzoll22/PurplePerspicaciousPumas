@@ -62,7 +62,17 @@ app.get('/games', function(req, res) {
   var promise = Game.find({}).exec();
 
   promise.then(function(games) {
-    res.json(games);
+    var sortedGames = [];
+    var gameNameFirstWords = games.map(function(game){
+      return game.gameName.split(/\W+/, 1)[0].toLowerCase();
+    })
+    var sortedGameNameFirstWords = gameNameFirstWords.slice().sort();
+    for(var i = 0; i < sortedGameNameFirstWords.length; i++){
+      var index = gameNameFirstWords.indexOf(sortedGameNameFirstWords[i]);
+      sortedGames.push(games[index]);
+      gameNameFirstWords[index] = null;
+    }
+    res.send(sortedGames);
   })
 });
 
