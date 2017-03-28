@@ -121,8 +121,8 @@ io.on('connection', (socket) => {
     // data needs to be gamename and username
     console.log('client joining room: ', data);
     socket.join(data.gameName);
-    let username = data.username;
-    let gameName = data.gameName;
+    var username = data.username;
+    var gameName = data.gameName;
     Sockets[socket] = gameName;
     console.log(Sockets[socket]);
     Rooms[gameName] ? Rooms[gameName]++ : Rooms[gameName] = 1;
@@ -131,7 +131,7 @@ io.on('connection', (socket) => {
     .then(function (game){
     // add client to game DB if they're not already in players list
       if (!game.players.includes(username)) {
-        let players = game.players.slice(0);
+        var players = game.players.slice(0);
         players.push(username);
         return queries.addPlayerToGameInstance(gameName, players);
       }
@@ -161,13 +161,13 @@ io.on('connection', (socket) => {
   })
 
   socket.on('prompt created', (data) => {
-    let gameName = data.gameName;
-    let prompt = data.prompt;
+    var gameName = data.gameName;
+    var prompt = data.prompt;
 
     queries.retrieveGameInstance(gameName)
     .then(function(game) {
-      let currentRound = game.currentRound;
-      let Rounds = game.rounds.slice(0);
+      var currentRound = game.currentRound;
+      var Rounds = game.rounds.slice(0);
 
       Rounds[currentRound].prompt = prompt;
       Rounds[currentRound].stage++;
@@ -185,15 +185,15 @@ io.on('connection', (socket) => {
 
 
   socket.on('submit response', (data) => {
-    let gameName = data.gameName;
-    let username = data.username;
-    let response = data.response;
+    var gameName = data.gameName;
+    var username = data.username;
+    var response = data.response;
 
     queries.retrieveGameInstance(gameName)
     .then(function(game) {
-      let currentRound = game.currentRound;
-      let currentResponses = game.rounds[currentRound].responses;
-      let currentRounds = game.rounds;
+      var currentRound = game.currentRound;
+      var currentResponses = game.rounds[currentRound].responses;
+      var currentRounds = game.rounds;
 
       if (!helpers.userAlreadySubmitted(username, currentResponses)) {
         currentRounds[currentRound].responses.push([response, username]);
@@ -225,14 +225,14 @@ io.on('connection', (socket) => {
 
   // on 'judge selection'
   socket.on('judge selection', (data) => {
-    let gameName = data.gameName;
-    let winner = data.winner;
+    var gameName = data.gameName;
+    var winner = data.winner;
     console.log('judge selection', data.winner);
     queries.retrieveGameInstance(gameName)
     .then(function (game) {
-      let currentRound = game.currentRound;
-      let currentResponses = game.rounds[currentRound].responses;
-      let Rounds = game.rounds.slice(0);
+      var currentRound = game.currentRound;
+      var currentResponses = game.rounds[currentRound].responses;
+      var Rounds = game.rounds.slice(0);
       Rounds[currentRound].winner = winner;
       Rounds[currentRound].stage++;
       console.log('rounds', Rounds);
@@ -263,12 +263,12 @@ io.on('connection', (socket) => {
 
   socket.on('ready to move on', (data) => {
     console.log('rdy');
-    let gameName = data.gameName;
-    let username = data.username;
+    var gameName = data.gameName;
+    var username = data.username;
     queries.retrieveGameInstance(gameName)
     .then(function(game) {
-      let currentRound = game.currentRound;
-      let Rounds = game.rounds.slice(0);
+      var currentRound = game.currentRound;
+      var Rounds = game.rounds.slice(0);
       if (!Rounds[currentRound].ready.includes(username)) {
         Rounds[currentRound].ready.push(username);
         queries.updateRounds(gameName, Rounds)
@@ -296,7 +296,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', (data) => {
     if (Rooms[Sockets[socket]]) {
       Rooms[Sockets[socket]]--;
-      let timer = 60;
+      var timer = 60;
       var disconnectTimeOut = function() {
         setTimeout(function(){
           if (timer === 0 && Rooms[Sockets[socket]] < 4) {
