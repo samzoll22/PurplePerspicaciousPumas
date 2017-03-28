@@ -38,7 +38,9 @@ userSchema.plugin(passportLocalMongoose);
 
 var gameInstanceModel = mongoose.model('gameInstanceModel', gameInstanceSchema);
 
-//COMMENT THIS OUT DURING GAME TESTING
+//Comment this code back in to have access to the dummy data on your local machine
+// it was commented out for depoloyment. 
+
 //Clearout database 
 // var collection = db.collection('gameinstancemodels');
 // collection.remove({});
