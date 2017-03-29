@@ -37,7 +37,19 @@ class SignUp extends React.Component {
     });
   }
 
+
   handleSignUpAttempt(email, username, password) {
+
+    //handles 99.99% of emails based off standard email check
+    //currently only logs whether emails are valid. will use as a check once we put things into production
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (this.state.email.match(re)) {
+      console.log("works!")
+    } else {
+      console.log("please send a valid email")
+    }
+
     $.ajax({
       url: '/signup',
       method: 'POST',

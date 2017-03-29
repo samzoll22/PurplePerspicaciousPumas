@@ -33,9 +33,9 @@ class CreateGame extends React.Component {
       password: '',
       players: [],
       rounds: [
-      {prompt: 'prompt 1', responses: [], winner: '', stage: initialStage, ready: []}, 
-      {prompt: 'prompt 2', responses: [], winner: '', stage: initialStage, ready: []}, 
-      {prompt: 'prompt 3', responses: [], winner: '', stage: initialStage, ready: []}, 
+      {prompt: 'prompt 1', responses: [], winner: '', stage: initialStage, ready: []},
+      {prompt: 'prompt 2', responses: [], winner: '', stage: initialStage, ready: []},
+      {prompt: 'prompt 3', responses: [], winner: '', stage: initialStage, ready: []},
       {prompt: 'prompt 4', responses: [], winner: '', stage: initialStage, ready: []}],
       currentRound: 0
     }
