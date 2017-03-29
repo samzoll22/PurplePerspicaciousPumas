@@ -2,7 +2,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
-var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
+var hostUrl =  'https://oranges-oranges-oranges.herokuapp.com/' || 'http://localhost:3000/';
 var Filter = require('bad-words');
 var filter = new Filter();
 
