@@ -109,15 +109,6 @@ app.get('/username', function(req, res) {
   res.status(200).send(user);
 });
 
-app.options('/login', function(req, res){
-  res.writeHead(200, {
-    'Access-Control-Allow-Origin':'*',
-    'Access-Control-Allow-Headers':'content-type'
-  })
-  res.end()
-});
-
-
 var server = app.listen(port, function() {
   console.log('App is listening on port: ', port);
 });
