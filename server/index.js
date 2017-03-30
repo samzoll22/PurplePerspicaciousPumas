@@ -352,6 +352,7 @@ io.on('connection', (socket) => {
   // to see if the user has reconnected, but currently the count system
   // is not properly incrementing.
   socket.on('disconnect', (data) => {
+<<<<<<< HEAD
 
     // if (Room[Sockets[socket]]) {
     //   var timer = 10;
@@ -360,6 +361,40 @@ io.on('connection', (socket) => {
     //       if () {}
     //     })
     //   };
+=======
+      queries.retrieveGameInstance(Sockets[socket])
+      .then(function(){
+        queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+        .then(function() {
+          io.to(Sockets[socket]).emit('disconnectTimeOut');
+        })
+      })
+
+    // if (Rooms[Sockets[socket]]) {
+    //   Rooms[Sockets[socket]]--;
+    //   var timer = 60;
+    //   var disconnectTimeOut = function() {
+    //     setTimeout(function(){
+    //       if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+    //         queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+    //         .then(function(){
+    //             io.to(Sockets[socket]).emit('disconnectTimeOut');
+    //         })
+    //       } else {
+    //         if (Rooms[Sockets[socket]] < 4) {
+    //           timer = timer - 1;
+    //           disconnectTimeOut();
+    //         }
+    //       }
+    //     }, 1000);
+    //   }
+    //   queries.retrieveGameInstance(Sockets[socket])
+    //   .then(function(game) {
+    //     if (game.gameStage === 'playing') {
+    //       disconnectTimeOut();
+    //     }
+    //   });
+>>>>>>> adding basic socket disconnect and attempting implementation on client
     // }
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
