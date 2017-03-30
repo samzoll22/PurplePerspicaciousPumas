@@ -7,8 +7,8 @@ class UserProfile extends React.Component {
   constructor(props) {
   	super(props);
   	this.state = {
-  	  user: null
-  	  achievementTabActive: false
+  	  user: null,
+  	  achievementTabActive: false,
   	  gameStatisticsTabActive: true
   	}
   }
