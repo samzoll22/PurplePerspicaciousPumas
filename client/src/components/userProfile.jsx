@@ -1,5 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
+import GameStatisticsTab from './gameStatisticsTab.jsx';
+import AchievementTab from './achievementTab.jsx'
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -22,6 +24,8 @@ class UserProfile extends React.Component {
   render(){
   	return (
   	  <div>
+  	    {this.state.gameStatisticsTabActive && <GameStatisticsTab/>}
+  	    {this.state.achievementTabActive && <AchievementTab/>}
   	  </div>
   	)
   }
