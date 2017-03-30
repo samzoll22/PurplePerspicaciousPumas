@@ -129,7 +129,9 @@ class Game extends React.Component {
   render() {
     return (
       <div id="game">
+
         {this.state.game && this.state.username && this.state.pregame.status === true && <Pregame game={this.state.game} user={this.state.username} pregame={this.state.pregame}/>}
+
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && this.state.pregame.status === null && <WaitingRoom game={this.state.game} user={this.state.username}/>}
 

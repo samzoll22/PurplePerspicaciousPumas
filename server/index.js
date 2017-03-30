@@ -366,7 +366,7 @@ io.on('connection', (socket) => {
     if (Rooms[Sockets[socket]]) {
       console.log('name is', Sockets[socket])
       Rooms[Sockets[socket]]--;
-      var timer = 15;
+      var timer = 30;
       var disconnectTimeOut = function() {
         setTimeout(function(){
           if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
