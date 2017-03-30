@@ -18,8 +18,9 @@ class UserProfile extends React.Component {
   	  	gamesLost: 51,
   	  	gamesParticipated: 123,
   	  	inGameCurrency: 1337,
-  	  	currentWinStreak: 4,
-  	  	currentLosingStreak: 0,
+  	  	currentStreak: '4 Losses',
+  	  	LongestLosingStreak: 4,
+  	  	LongestWinStreak: 3
   	  },
   	  achievementTabActive: false,
   	  gameStatisticsTabActive: true

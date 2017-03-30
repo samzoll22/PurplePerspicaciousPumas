@@ -14,10 +14,11 @@ var GameStatisticsPane = (props) => {
       <hr/>
       <div>Currency: {props.data.inGameCurrency} oranges</div>
       <hr/>
-      <div>Current Win Streak: {props.data.currentWinStreak}</div>
+      <div>Current Streak: {props.data.currentStreak}</div>
       <hr/>
-      <div>Current Losing Streak: {props.data.currentLosingStreak}</div>
+      <div>Longest Winning Streak: {props.data.LongestWinStreak}</div>
       <hr/>
+      <div>Longest Losing Streak: {props.data.LongestLosingStreak}</div>
     </div>
   )
 }
