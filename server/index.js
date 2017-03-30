@@ -10,6 +10,9 @@ var User = models.userModel;
 var Game = models.gameInstanceModel;
 var queries = require('../db/db-queries.js');
 var helpers = require('./helpers.js');
+var nodemailer = require('nodemailer');
+var fs = require('fs');
+// var signupEmail = require('./signupEmail.html')
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -42,7 +45,40 @@ passport.deserializeUser(User.deserializeUser());
 // mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
 
 
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'oranges2oranges.auto@gmail.com',
+        pass: 'password.admin'
+    }
+});
+
+// setup email data with unicode symbols
+
+
+
+
 app.post('/signup', function (req, res) {
+
+  var emailData = '';
+
+  let mailOptions = {
+    from: '"Oranges2Oranges 🍊" <oranges2oranges.admin@gmail.com>', // sender address
+    to: req.body.email, // list of receivers
+    subject: 'Welcome ' + req.body.username + '!', // Subject line
+    text: 'Welcome to 🍊❷🍊s!', // plain text body
+    html: fs.readFileSync(__dirname + '/signupEmail.txt', 'utf8')
+  };
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message %s sent: %s', info.messageId, info.response);
+   })
+
+
   User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function (err, user) {
     if (err) {
       console.log(err);
@@ -52,7 +88,7 @@ app.post('/signup', function (req, res) {
       res.status(201).send('created');
     })
   });
-})
+});
 
 app.post('/login', passport.authenticate('local'), function(req, res) {
   console.log('in login request');
@@ -118,6 +154,7 @@ app.get('/logout', function(req, res) {
 
 
 //don't need the app.options
+
 var server = app.listen(port, function() {
   console.log('App is listening on port: ', port);
 });
