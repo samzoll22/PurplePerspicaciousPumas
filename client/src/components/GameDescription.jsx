@@ -2,6 +2,7 @@
 import React from 'react';
 import { Col, Panel, Modal } from 'react-bootstrap';
 
+
 class GameDescription extends React.Component {
   constructor(props) {
     super(props)
@@ -19,6 +20,7 @@ class GameDescription extends React.Component {
 
   render() {
     return (
+
       <div>
       <button type="button" className={"btn btn-default"} onClick={this.handleShowDescription}>What Is It?</button>
 
@@ -37,10 +39,10 @@ class GameDescription extends React.Component {
           </Modal.Footer>
        </Modal>
       </div>
+
     )
   }
 }
 
 
 export default GameDescription;
-
