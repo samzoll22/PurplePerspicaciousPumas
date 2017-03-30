@@ -345,76 +345,24 @@ io.on('connection', (socket) => {
     })
   })
 
+  // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
 
-  // The commented out function is meant to be a way to handle disconnects
-  // It requires some debugging to be functional, and is therefore currently
-  // commented out. When a user disconnects it should check every second
-  // to see if the user has reconnected, but currently the count system
-  // is not properly incrementing.
   socket.on('disconnect', (data) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-    // if (Room[Sockets[socket]]) {
-    //   var timer = 10;
-    //   var discconectTimeOut = function() {
-    //     setTimeout(function() {
-    //       if () {}
-    //     })
-    //   };
-=======
-      queries.retrieveGameInstance(Sockets[socket])
-      .then(function(){
-        queries.setGameInstanceGameStageToGameOver(Sockets[socket])
-        .then(function() {
-          io.to(Sockets[socket]).emit('disconnectTimeOut');
-        })
-      })
-
-    // if (Rooms[Sockets[socket]]) {
-    //   Rooms[Sockets[socket]]--;
-    //   var timer = 60;
-    //   var disconnectTimeOut = function() {
-    //     setTimeout(function(){
-    //       if (timer === 0 && Rooms[Sockets[socket]] < 4) {
-    //         queries.setGameInstanceGameStageToGameOver(Sockets[socket])
-    //         .then(function(){
-    //             io.to(Sockets[socket]).emit('disconnectTimeOut');
-    //         })
-    //       } else {
-    //         if (Rooms[Sockets[socket]] < 4) {
-    //           timer = timer - 1;
-    //           disconnectTimeOut();
-    //         }
-    //       }
-    //     }, 1000);
-    //   }
-    //   queries.retrieveGameInstance(Sockets[socket])
-    //   .then(function(game) {
-    //     if (game.gameStage === 'playing') {
-    //       disconnectTimeOut();
-    //     }
-    //   });
->>>>>>> adding basic socket disconnect and attempting implementation on client
-    // }
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {
-      console.log('name is', Sockets[socket])
       Rooms[Sockets[socket]]--;
       var timer = 30;
       var disconnectTimeOut = function() {
         setTimeout(function(){
           if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
-            console.log('inside set timeout');
             queries.setGameInstanceGameStageToGameOver(Sockets[socket])
             .then(function(){
                 io.to(Sockets[socket]).emit('disconnectTimeOut');
             })
           } else {
             if (countAtDisconnect !== Rooms[Sockets[socket]]) {
-              console.log('countAtDisconnect', countAtDisconnect)
-              console.log('rooms socket socket again', Rooms[Sockets[socket]])
               timer = timer - 1;
               disconnectTimeOut();
             }
@@ -422,34 +370,12 @@ io.on('connection', (socket) => {
         }, 1000);
       }
       queries.retrieveGameInstance(Sockets[socket])
-=======
-    if (Rooms[Sockets[socket]]) {
-      Rooms[Sockets[socket]]--;
-      var timer = 10;
-      var disconnectTimeOut = function() {
-        setTimeout(function(){
-          if (timer === 0 && Rooms[Sockets[socket]] < 4) {
-            queries.setGameInstanceGameStageToGameOver(Sockets[socket])
-            .then(function(){
-                io.to(Sockets[socket]).emit('disconnectTimeOut');
-            })
-          } else {
-            if (Rooms[Sockets[socket]] < 4) {
-              timer = timer - 1;
-              disconnectTimeOut();
-            }
-          }
-        }, 1000);
-      }
-      queries.retrieveGameInstance(Sockets[socket])
->>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
       .then(function(game) {
         if (game.gameStage === 'playing') {
           disconnectTimeOut();
         }
       });
     }
-
     console.log('a user disconnected', data);
   });
 });
