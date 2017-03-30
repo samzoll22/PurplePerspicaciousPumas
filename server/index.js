@@ -359,7 +359,17 @@ io.on('connection', (socket) => {
     })
   })
 
+<<<<<<< 8893e87c59f9dcd3f9760716896393e2d4c1c1ec
   // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
+=======
+  //socket for the messages
+  socket.on('send:mesaage', function (data) {
+    socket.broadcast.emit('send:message', {
+        text: data.text
+    });
+  });
+
+>>>>>>> added chat components into game.jsx
 
   socket.on('disconnect', (data) => {
     var countAtDisconnect = Rooms[Sockets[socket]];

@@ -6,6 +6,7 @@ import EndOfGame from './EndOfGame.jsx';
 import $ from 'jquery';
 import io from 'socket.io-client';
 import { PageHeader } from 'react-bootstrap';
+import ChatWindow from '../Chat/ChatWindow.jsx';
 
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
@@ -19,6 +20,7 @@ class Game extends React.Component {
       username: null,
       seconds: null,
     };
+
 
     this.getGameData = this.getGameData.bind(this);
     this.getUsername = this.getUsername.bind(this);
@@ -61,6 +63,7 @@ class Game extends React.Component {
       console.log('disconnectTimeOut');
       this.props.route.sendToLobby.call(this, true);
     })
+
 
   }
 
@@ -122,6 +125,8 @@ class Game extends React.Component {
     socket.emit('prompt created', {gameName: this.props.params.gamename, prompt: prompt});
   }
 
+
+
   render() {
     return (
       <div id="game">
@@ -131,6 +136,8 @@ class Game extends React.Component {
         {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
+
+        <ChatWindow />
       </div>
     )
   }
