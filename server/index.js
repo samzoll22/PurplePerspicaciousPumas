@@ -109,6 +109,11 @@ app.get('/username', function(req, res) {
   res.status(200).send(user);
 });
 
+app.get('/logout', function(req, res) {
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
+})
 
 
 //don't need the app.options
