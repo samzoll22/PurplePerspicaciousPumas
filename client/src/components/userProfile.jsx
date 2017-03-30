@@ -24,6 +24,7 @@ class UserProfile extends React.Component {
   render(){
   	return (
   	  <div>
+  	    <div>{this.props.params.username}</div>
   	    {this.state.gameStatisticsTabActive && <GameStatisticsTab/>}
   	    {this.state.achievementTabActive && <AchievementTab/>}
   	  </div>
