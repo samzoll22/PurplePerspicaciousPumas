@@ -352,18 +352,33 @@ io.on('connection', (socket) => {
   // to see if the user has reconnected, but currently the count system
   // is not properly incrementing.
   socket.on('disconnect', (data) => {
+
+    // if (Room[Sockets[socket]]) {
+    //   var timer = 10;
+    //   var discconectTimeOut = function() {
+    //     setTimeout(function() {
+    //       if () {}
+    //     })
+    //   };
+    // }
+    var countAtDisconnect = Rooms[Sockets[socket]];
+    var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {
+      console.log('name is', Sockets[socket])
       Rooms[Sockets[socket]]--;
-      var timer = 10;
+      var timer = 15;
       var disconnectTimeOut = function() {
         setTimeout(function(){
-          if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+          if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
+            console.log('inside set timeout');
             queries.setGameInstanceGameStageToGameOver(Sockets[socket])
             .then(function(){
                 io.to(Sockets[socket]).emit('disconnectTimeOut');
             })
           } else {
-            if (Rooms[Sockets[socket]] < 4) {
+            if (countAtDisconnect !== Rooms[Sockets[socket]]) {
+              console.log('countAtDisconnect', countAtDisconnect)
+              console.log('rooms socket socket again', Rooms[Sockets[socket]])
               timer = timer - 1;
               disconnectTimeOut();
             }
