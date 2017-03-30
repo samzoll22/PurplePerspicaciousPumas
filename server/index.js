@@ -161,7 +161,7 @@ var server = app.listen(port, function() {
 
 app.get('/userprofile', function(req, res) {
   console.log('get request from user profile received', req.query.username)
-  var user = req.query.username; 
+  var user = req.query.username;
   var promise = User.find({username: user}).exec();
 
   promise.then(function(userinfo){
@@ -201,6 +201,7 @@ io.on('connection', (socket) => {
     }).then(function () {
       return queries.retrieveGameInstance(gameName);
     }).then(function (game) {
+<<<<<<< HEAD
         // then, check num of players in players list
         // if it's 4 and gameStage is waiting
             // emit 'pregame' event and send number of seconds and pregame status to client
@@ -372,6 +373,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', (data) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {
@@ -413,6 +415,41 @@ io.on('connection', (socket) => {
     }
 <<<<<<< HEAD
 =======
+=======
+      queries.retrieveGameInstance(Sockets[socket])
+      .then(function(){
+        queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+        .then(function() {
+          io.to(Sockets[socket]).emit('disconnectTimeOut');
+        })
+      })
+
+    // if (Rooms[Sockets[socket]]) {
+    //   Rooms[Sockets[socket]]--;
+    //   var timer = 60;
+    //   var disconnectTimeOut = function() {
+    //     setTimeout(function(){
+    //       if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+    //         queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+    //         .then(function(){
+    //             io.to(Sockets[socket]).emit('disconnectTimeOut');
+    //         })
+    //       } else {
+    //         if (Rooms[Sockets[socket]] < 4) {
+    //           timer = timer - 1;
+    //           disconnectTimeOut();
+    //         }
+    //       }
+    //     }, 1000);
+    //   }
+    //   queries.retrieveGameInstance(Sockets[socket])
+    //   .then(function(game) {
+    //     if (game.gameStage === 'playing') {
+    //       disconnectTimeOut();
+    //     }
+    //   });
+    // }
+>>>>>>> adding basic socket disconnect and attempting implementation on client
 
 >>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
     console.log('a user disconnected', data);
