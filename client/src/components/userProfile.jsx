@@ -12,27 +12,28 @@ class UserProfile extends React.Component {
   	  achievementTabActive: false,
   	  gameStatisticsTabActive: true
   	}
+  	this.getUserProfile = this.getUserProfile.bind(this);
   	this.handleClickAchievementTab = this.handleClickAchievementTab.bind(this);
   	this.handleClickGameStatisticsTab = this.handleClickGameStatisticsTab.bind(this);
   }
 
   componentDidMount() {
+  	// console.log(this.state.user)
   	this.getUserProfile(this.props.params.username)
   }
 
   getUserProfile(user) {
   	$.ajax({
   	  url: '/userprofile',
-  	  type: 'GET',
-  	  headers: {'content-type': 'application/json'},
-  	  data: {username: user},
+  	  method: 'GET',
+  	  data: 'username=' + user,
   	  success: (data) => {
   	  	console.log('data retrieved about user', data)
   	  },
   	  error: (err) => {
   	  	console.log('error retrieving user profiles', err)
   	  }
-  	})
+  	});
   }
 
   handleClickGameStatisticsTab(event) {
