@@ -1,9 +1,16 @@
 body {
   background-color: #ffad33;
+  background-image: url(http://az616578.vo.msecnd.net/files/2016/12/10/6361701058642163771323492194_o-GMO-ORANGES-facebook.jpg);
+  font-family: 'Fredoka One', cursive;
+  color: #000000;
 /*  align-items: center;
   justify-content: center;*/
 /*  display: flex;
 */}
+
+.backgroundStyles {
+
+}
 
 #home, #home-header, #signup-header, #login-header, #lobby, #create-game, #game {
   text-align: center;
