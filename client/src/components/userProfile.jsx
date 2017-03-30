@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
   	  	gamesParticipated: 123,
   	  	inGameCurrency: 1337,
   	  	currentWinStreak: 4,
-  	  	currentLossStreak: 0,
+  	  	currentLosingStreak: 0,
   	  },
   	  achievementTabActive: false,
   	  gameStatisticsTabActive: true
