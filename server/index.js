@@ -353,6 +353,7 @@ io.on('connection', (socket) => {
   // is not properly incrementing.
   socket.on('disconnect', (data) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     // if (Room[Sockets[socket]]) {
     //   var timer = 10;
@@ -421,6 +422,27 @@ io.on('connection', (socket) => {
         }, 1000);
       }
       queries.retrieveGameInstance(Sockets[socket])
+=======
+    if (Rooms[Sockets[socket]]) {
+      Rooms[Sockets[socket]]--;
+      var timer = 10;
+      var disconnectTimeOut = function() {
+        setTimeout(function(){
+          if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+            queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+            .then(function(){
+                io.to(Sockets[socket]).emit('disconnectTimeOut');
+            })
+          } else {
+            if (Rooms[Sockets[socket]] < 4) {
+              timer = timer - 1;
+              disconnectTimeOut();
+            }
+          }
+        }, 1000);
+      }
+      queries.retrieveGameInstance(Sockets[socket])
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
       .then(function(game) {
         if (game.gameStage === 'playing') {
           disconnectTimeOut();
