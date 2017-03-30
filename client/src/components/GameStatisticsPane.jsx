@@ -1,6 +1,6 @@
 import React from 'react';
 
-var GameStatisticsTab = (props) => {
+var GameStatisticsPane = (props) => {
   return (
     <div>
       <hr/>
@@ -22,4 +22,4 @@ var GameStatisticsTab = (props) => {
   )
 }
 
-export default GameStatisticsTab
+export default GameStatisticsPane

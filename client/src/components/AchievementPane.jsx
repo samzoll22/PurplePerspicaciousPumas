@@ -1,12 +1,12 @@
 import React from 'react';
 
-var AchievementTab = (props) => {
+var AchievementPane = (props) => {
   return (
     <div>
-      achievement tab active
+      
     </div>
   )
 }
 
-export default AchievementTab
+export default AchievementPane
 
