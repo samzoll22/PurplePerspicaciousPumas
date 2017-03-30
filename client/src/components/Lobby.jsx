@@ -6,6 +6,7 @@ import CreateGame from './CreateGame.jsx';
 import YourGames from './YourGames.jsx';
 import PlayerDisconnected from './PlayerDisconnected.jsx'
 import { Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
+import LogOut from './LogOut.jsx';
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
 //TODO:
@@ -61,6 +62,7 @@ class Lobby extends React.Component {
     return (
 
       <Col id="lobby" sm={6} smOffset={3}>
+        <LogOut />
         <PageHeader>Lobby</PageHeader>
         {this.props.params.disconnectTimeOut && <PlayerDisconnected/>}
         <CreateGame sendToGame={this.props.route.sendToGame}/>
@@ -68,7 +70,7 @@ class Lobby extends React.Component {
         <h4>Current Games:</h4>
         {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
       </Col>
-      
+
     )
   }
 }
