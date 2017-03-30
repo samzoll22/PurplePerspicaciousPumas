@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-import GameStatisticsTab from './gameStatisticsTab.jsx';
-import AchievementTab from './achievementTab.jsx';
+import GameStatisticsPane from './GameStatisticsPane.jsx';
+import AchievementPane from './AchievementPane.jsx';
 import TabButton from './tabButton.jsx';
 
 class UserProfile extends React.Component {
@@ -68,8 +68,8 @@ class UserProfile extends React.Component {
   	    <div>{this.props.params.username}</div>
   	    <TabButton displayName='Achievement' handleClick={this.handleClickAchievementTab}/>
   	    <TabButton displayName='Game Statistics' handleClick={this.handleClickGameStatisticsTab}/>
-  	    {this.state.gameStatisticsTabActive && <GameStatisticsTab data={this.state.userDummy}/>}
-  	    {this.state.achievementTabActive && <AchievementTab data={this.state.userDummy}/>}
+  	    {this.state.gameStatisticsTabActive && <GameStatisticsPane data={this.state.userDummy}/>}
+  	    {this.state.achievementTabActive && <AchievementPane data={this.state.userDummy}/>}
   	  </div>
   	)
   }
