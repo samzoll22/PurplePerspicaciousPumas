@@ -20,16 +20,15 @@ class LoginParent extends React.Component {
   }
 
   render() {
-
     return (
-      <Col id="LoginParent" className={"LoginStyles"}>
+      <Col id="LoginParent" sm={6} smOffset={3}>
         {!this.state.newUser ?
         (<LogIn sendToLobby={this.props.sendToLobby} />)
         : (<SignUp sendToLobby={this.props.sendToLobby} />)
         }
         {!this.state.newUser ?
         ( <div>
-            <p>New to Oranges 2 Oranges?</p>
+            <p>New to 🍊2️⃣🍊?</p>
             <button type="button" className={"btn btn-default"} onClick={this.handleShowSignup}>Sign Up</button>
           </div> )
         : ( <div>
