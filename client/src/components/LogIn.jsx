@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import $ from 'jquery';
-import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel, Well } from 'react-bootstrap';
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 
 
@@ -52,33 +52,33 @@ class LogIn extends React.Component {
 
 
     return (
-      <Col id="log-in">
+      <Well id="log-in">
         <h4 id="login-header">Log In</h4>
         {this.state.error && errorMessage}
-        <FormGroup bsSize="small">
-          <Form horizontal>
+        <FormGroup >
+          <Form horizontal bsSize="large">
             <Col>
               <FormControl type="username" placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange} />
             </Col>
           </Form>
         </FormGroup>
-        <FormGroup bsSize="small">
-          <Form horizontal>
+        <FormGroup >
+          <Form horizontal bsSize="large">
             <Col>
               <FormControl type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange} />
             </Col>
           </Form>
         </FormGroup>
 
-      <FormGroup bsSize="small">
+      <FormGroup>
         <Col>
-          <Button type="submit" onClick={() => this.handleLogInAttempt(this.state.username, this.state.password)}>
+          <Button type="submit" bsSize="small" block onClick={() => this.handleLogInAttempt(this.state.username, this.state.password)}>
             Log In
           </Button>
         </Col>
       </FormGroup>
       <br />
-    </Col>
+    </Well>
 
     )
   }

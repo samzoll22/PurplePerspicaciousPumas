@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import $ from 'jquery';
-import { Button, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel, Well } from 'react-bootstrap';
 var hostUrl = process.env.LIVE_URL || 'http://localhost:3000/';
 var Filter = require('bad-words');
 var filter = new Filter();
@@ -69,7 +69,7 @@ class SignUp extends React.Component {
     const errorMessage = <p>That username is already taken. Please try again with a different username.</p>
 
     return (
-      <Col id="sign-up">
+      <Well id="sign-up">
         <h4 id="signup-header">Sign Up</h4>
         {this.state.error && errorMessage}
         <FormGroup>
@@ -96,9 +96,9 @@ class SignUp extends React.Component {
           </Form>
         </FormGroup>
 
-      <FormGroup bsSize="small">
+      <FormGroup >
         <Col>
-          <Button type="submit" onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>
+          <Button type="submit" bsSize="small" block onClick={() => this.handleSignUpAttempt(this.state.email, this.state.username, this.state.password)}>
             Sign Up
           </Button>
           <br />
@@ -106,7 +106,7 @@ class SignUp extends React.Component {
           <br />
         </Col>
       </FormGroup>
-    </Col>
+    </Well>
 
     )
   }
