@@ -62,8 +62,8 @@ class Lobby extends React.Component {
     return (
 
       <Col id="lobby" sm={6} smOffset={3}>
+        {this.state.username ? (<PageHeader>Welcome {this.state.username} !</PageHeader>) : (<PageHeader>Lobby</PageHeader>)}
         <LogOut sendToHome={this.props.route.sendToHome}/>
-        <PageHeader>Lobby</PageHeader>
         {this.props.params.disconnectTimeOut && <PlayerDisconnected/>}
         <CreateGame sendToGame={this.props.route.sendToGame}/>
         {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
