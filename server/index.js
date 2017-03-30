@@ -371,6 +371,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', (data) => {
+<<<<<<< HEAD
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {
@@ -379,12 +380,24 @@ io.on('connection', (socket) => {
       var disconnectTimeOut = function() {
         setTimeout(function(){
           if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
+=======
+    if (Rooms[Sockets[socket]]) {
+      Rooms[Sockets[socket]]--;
+      var timer = 10;
+      var disconnectTimeOut = function() {
+        setTimeout(function(){
+          if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
             queries.setGameInstanceGameStageToGameOver(Sockets[socket])
             .then(function(){
                 io.to(Sockets[socket]).emit('disconnectTimeOut');
             })
           } else {
+<<<<<<< HEAD
             if (countAtDisconnect !== Rooms[Sockets[socket]]) {
+=======
+            if (Rooms[Sockets[socket]] < 4) {
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
               timer = timer - 1;
               disconnectTimeOut();
             }
@@ -398,6 +411,10 @@ io.on('connection', (socket) => {
         }
       });
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
     console.log('a user disconnected', data);
   });
 });
