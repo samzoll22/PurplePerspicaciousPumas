@@ -4,7 +4,7 @@ import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import GameDescription from './GameDescription.jsx';
 import LoginParent from './LoginParent.jsx';
-import { Col, PageHeader} from 'react-bootstrap';
+import { Col, PageHeader, NavBar} from 'react-bootstrap';
 
 // props.game === game instance object
 
