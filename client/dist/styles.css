@@ -20,3 +20,19 @@ body {
 #response-item, #rules {
   text-align: left;
 }
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal-container {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
