@@ -64,6 +64,7 @@ class Lobby extends React.Component {
   render() {
 
     return (
+
       <container>
         <Col id="lobby" sm={12}>
           {this.state.username ? (<PageHeader>Welcome {this.state.username} !</PageHeader>) : (<PageHeader>Lobby</PageHeader>)}
@@ -80,6 +81,7 @@ class Lobby extends React.Component {
           {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
         </Col>
       </container>
+
     )
   }
 }

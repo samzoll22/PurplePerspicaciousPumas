@@ -374,6 +374,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', (data) => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {
@@ -383,12 +384,17 @@ io.on('connection', (socket) => {
         setTimeout(function(){
           if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
 =======
+=======
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
     if (Rooms[Sockets[socket]]) {
       Rooms[Sockets[socket]]--;
       var timer = 10;
       var disconnectTimeOut = function() {
         setTimeout(function(){
           if (timer === 0 && Rooms[Sockets[socket]] < 4) {
+<<<<<<< HEAD
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
+=======
 >>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
             queries.setGameInstanceGameStageToGameOver(Sockets[socket])
             .then(function(){
@@ -396,7 +402,11 @@ io.on('connection', (socket) => {
             })
           } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (countAtDisconnect !== Rooms[Sockets[socket]]) {
+=======
+            if (Rooms[Sockets[socket]] < 4) {
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
 =======
             if (Rooms[Sockets[socket]] < 4) {
 >>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
@@ -406,6 +416,7 @@ io.on('connection', (socket) => {
           }
         }, 1000);
       }
+<<<<<<< HEAD
       queries.retrieveGameInstance(Sockets[socket])
       .then(function(game) {
         if (game.gameStage === 'playing') {
@@ -450,6 +461,15 @@ io.on('connection', (socket) => {
     //   });
     // }
 >>>>>>> adding basic socket disconnect and attempting implementation on client
+=======
+      queries.retrieveGameInstance(Sockets[socket])
+      .then(function(game) {
+        if (game.gameStage === 'playing') {
+          disconnectTimeOut();
+        }
+      });
+    }
+>>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
 
 >>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
     console.log('a user disconnected', data);
