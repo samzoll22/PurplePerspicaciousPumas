@@ -62,18 +62,17 @@ class Lobby extends React.Component {
 
   render() {
     return (
-      <div>
-      <UsernameDisplay username={this.state.username}/>
-        <Col id="lobby" sm={6} smOffset={3}>
-          <LogOut sendToHome={this.props.route.sendToHome}/>
-          <PageHeader>Lobby</PageHeader>
-          {this.props.params.disconnectTimeOut && <PlayerDisconnected/>}
-          <CreateGame sendToGame={this.props.route.sendToGame}/>
-          {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
-          <h4>Current Games:</h4>
-          {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
-        </Col>
-      </div>
+
+      <Col id="lobby" sm={6} smOffset={3}>
+        {this.state.username ? (<PageHeader>Welcome {this.state.username} !</PageHeader>) : (<PageHeader>Lobby</PageHeader>)}
+        <LogOut sendToHome={this.props.route.sendToHome}/>
+        {this.props.params.disconnectTimeOut && <PlayerDisconnected/>}
+        <CreateGame sendToGame={this.props.route.sendToGame}/>
+        {this.state.games && <YourGames games={this.state.games} username={this.state.username} sendToGame={this.props.route.sendToGame}/>}
+        <h4>Current Games:</h4>
+        {this.state.games && <GameList games={this.state.games} sendToGame={this.props.route.sendToGame}/>}
+      </Col>
+
     )
   }
 }
