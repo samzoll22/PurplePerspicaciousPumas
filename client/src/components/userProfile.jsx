@@ -8,7 +8,19 @@ class UserProfile extends React.Component {
   constructor(props) {
   	super(props);
   	this.state = {
+  	  //creating dummy data to display at the moment
+  	  //TODO: refactor to real data when it is set up
   	  user: null,
+  	  userDummy: {
+  	  	username: 'NyanCat4Lyfe',
+  	  	achievements: [],
+  	  	gamesWon: 72,
+  	  	gamesLost: 51,
+  	  	gamesParticipated: 123,
+  	  	inGameCurrency: 1337,
+  	  	currentWinStreak: 4,
+  	  	currentLossStreak: 0,
+  	  },
   	  achievementTabActive: false,
   	  gameStatisticsTabActive: true
   	}
@@ -56,8 +68,8 @@ class UserProfile extends React.Component {
   	    <div>{this.props.params.username}</div>
   	    <TabButton displayName='Achievement' handleClick={this.handleClickAchievementTab}/>
   	    <TabButton displayName='Game Statistics' handleClick={this.handleClickGameStatisticsTab}/>
-  	    {this.state.gameStatisticsTabActive && <GameStatisticsTab/>}
-  	    {this.state.achievementTabActive && <AchievementTab/>}
+  	    {this.state.gameStatisticsTabActive && <GameStatisticsTab data={this.state.userDummy}/>}
+  	    {this.state.achievementTabActive && <AchievementTab data={this.state.userDummy}/>}
   	  </div>
   	)
   }
