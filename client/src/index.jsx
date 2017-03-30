@@ -16,7 +16,11 @@ class App extends React.Component {
 
       this.sendToGame = this.sendToGame.bind(this);
       this.sendToLobby = this.sendToLobby.bind(this);
+<<<<<<< 6b6de32c8eac76a17bd3c0d342a105fc249154e8
       this.sendToProfile = this.sendToProfile.bind(this);
+=======
+      this.sendToHome = this.sendToHome.bind(this);
+>>>>>>> log out button completed and redirects to signup page
     }
 
     sendToLobby(disconnectTimeOut) {
@@ -25,6 +29,10 @@ class App extends React.Component {
       } else {
         hashHistory.push('/lobby');
       }
+    }
+
+    sendToHome() {
+      hashHistory.push('/');
     }
 
     sendToGame(gameName) {
@@ -39,9 +47,15 @@ class App extends React.Component {
       return (
         <div>
           <Router history={hashHistory}>
+<<<<<<< 6b6de32c8eac76a17bd3c0d342a105fc249154e8
             <Route path="/" component={Home} sendToLobby={this.sendToLobby}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile}/>
             <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile}/>
+=======
+            <Route path="/" component={Home} sendToLobby={this.sendToLobby} handleSignUp={this.handleSignUp} handleLogIn={this.handleLogIn}/>
+            <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame} disconnectTimeOut={this.state.disconnectTimeOut} sendToHome={this.sendToHome}/>
+            <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} disconnectTimeOut={this.state.disconnectTimeOut}/>
+>>>>>>> log out button completed and redirects to signup page
             <Route path="/game/:gamename" component={Game} sendToLobby={this.sendToLobby}/>
             <Route path="/user" component={UserProfile} sendToLobby={this.sendToLobby}/>
           </Router>
@@ -55,4 +69,3 @@ ReactDOM.render(
   <App/>,
   document.getElementById('app')
 );
-

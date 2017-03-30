@@ -111,7 +111,8 @@ app.get('/username', function(req, res) {
 
 app.get('/logout', function(req, res) {
   req.session.destroy(function (err) {
-    res.redirect('/');
+    console.log('session destroyed')
+    res.send('session destroyed')
   });
 })
 
