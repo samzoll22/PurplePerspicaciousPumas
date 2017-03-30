@@ -34,8 +34,10 @@ var userSchema = new Schema({
 	email: String,
   inGameCurrency: Number,
   itemCache: Array,
-  achievements: Array,  
-  
+  achievements: Array,
+  gamesWon: Number,
+  gamesLost: Number,
+  gamesParticipated: Number
 });
 
 userSchema.plugin(passportLocalMongoose);
