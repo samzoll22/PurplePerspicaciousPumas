@@ -62,7 +62,7 @@ class Game extends React.Component {
     socket.on('disconnectTimeOut', () => {
       // this function is related to the commented out function
       // in server/index.js
-      console.log('disconnectTimeOut')
+      console.log('disconnectTimeOut');
       this.props.route.sendToLobby.call(this, true);
     })
 
