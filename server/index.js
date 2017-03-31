@@ -364,6 +364,7 @@ io.on('connection', (socket) => {
 =======
   //socket for the messages
   socket.on('send:mesaage', function (data) {
+    console.log('success');
     socket.broadcast.emit('send:message', {
         text: data.text
     });

@@ -5,7 +5,6 @@ class Input extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      messages: [],
       text: ''
     }
     this.changeHandler = this.changeHandler.bind(this)
@@ -18,11 +17,13 @@ class Input extends React.Component {
   }
 
   handleSubmit(e) {
+//preventDefault() prevents the native HTML form from refreshing the page when it is submitted
     e.preventDefault();
     var message = {
       text: this.state.text
     }
     this.props.submit(message)
+    // this.props.messageReceive(message)
     this.setState({text: ''})
   }
 
@@ -30,7 +31,7 @@ class Input extends React.Component {
     return (
       <div className="message-form">
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.changeHandler} value={this.state.text} />
+          <input type="text" onChange={this.changeHandler} value={this.state.text} placeholder="type here..." />
           <input type="submit" value="Send!" />
         </form>
       </div>

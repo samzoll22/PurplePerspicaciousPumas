@@ -11,23 +11,27 @@ class ChatWindow extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      messages: [],
-      text: ''
+      messages: []
     }
     this.messageSubmit = this.messageSubmit.bind(this)
     this.messageReceive = this.messageReceive.bind(this)
 
-    socket.on('send:message', this.messageReceive)
+    socket.on('send:message', message => {this.messageReceive})
 
   }
 
   messageReceive(message) {
-    var arr = [message]
-    this.setState({messages: this.state.messages.concat(arr)})
+    var newMessage = this.state.messages
+    newMessage.push(message)
+    this.setState({messages: newMessage})
+    console.log(this.state.messages)
   }
 
   messageSubmit(message) {
-    this.setState({messages: this.state.messages.push(message)})
+    var newMessage = this.state.messages
+    newMessage.push(message)
+    this.setState({messages: newMessage})
+    console.log(this.state.messages)
     socket.emit('send:message', message)
   }
 
@@ -36,7 +40,7 @@ class ChatWindow extends React.Component {
       <div className="chat" style={{height: '300px'}}>
         <h3>Game Chat</h3>
         <Messages message={this.state.messages}/>
-        <Input submit={this.messageSubmit}/>
+        <Input submit={this.messageSubmit} />
       </div>
     )
   }
