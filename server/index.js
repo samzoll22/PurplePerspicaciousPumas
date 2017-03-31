@@ -335,7 +335,9 @@ io.on('connection', (socket) => {
     .then(function(game) {
       var currentRound = game.currentRound;
       var Rounds = game.rounds.slice(0);
+
       if (Rounds[currentRound].ready.indexOf(username) === -1) {
+
         Rounds[currentRound].ready.push(username);
         queries.updateRounds(gameName, Rounds)
         .then(function() {
