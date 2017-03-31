@@ -1,5 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
+import { Button } from 'react-bootstrap';
+
 
 class LogOut extends React.Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class LogOut extends React.Component {
 
   render() {
     return (
-      <button id="log-out" onClick={this.destroySession}>Log Out</button>
+      <Button id="log-out" bsSize="small" onClick={this.destroySession}>Log Out</Button>
     )
   }
 }

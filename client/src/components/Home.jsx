@@ -3,6 +3,7 @@ import React from 'react';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import GameDescription from './GameDescription.jsx';
+import LoginParent from './LoginParent.jsx';
 import { Col, PageHeader} from 'react-bootstrap';
 
 // props.game === game instance object
@@ -14,11 +15,14 @@ const Home = (props) => (
       <GameDescription />
     </Col>
     <Col sm={4} smOffset={4}>
-    <SignUp sendToLobby={props.route.sendToLobby}/>
-    <LogIn sendToLobby={props.route.sendToLobby} />
+      <LoginParent sendToLobby={props.route.sendToLobby}/>
     </Col>
   </Col>
 )
 
 
 export default Home;
+
+
+    // <SignUp sendToLobby={props.route.sendToLobby} />
+    // <LogIn sendToLobby={props.route.sendToLobby} />
