@@ -13,7 +13,7 @@ class UserProfile extends React.Component {
   	  user: null,
   	  userDummy: {
   	  	username: 'NyanCat4Lyfe',
-  	  	achievements: [],
+  	  	achievements: [{OrangeKing: false},{GoodEffort: true}],
   	  	gamesWon: 72,
   	  	gamesLost: 51,
   	  	gamesParticipated: 123,
