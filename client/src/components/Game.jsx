@@ -137,7 +137,7 @@ class Game extends React.Component {
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
 
-        <ChatWindow />
+
       </div>
     )
   }
