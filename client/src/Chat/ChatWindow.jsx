@@ -22,17 +22,18 @@ class ChatWindow extends React.Component {
   }
 
   messageReceive(message) {
-    this.state.message.push(message)
+    var arr = [message]
+    this.setState({messages: this.state.messages.concat(arr)})
   }
 
   messageSubmit(message) {
-    this.state.message.push(message)
+    this.setState({messages: this.state.messages.push(message)})
     socket.emit('send:message', message)
   }
 
   render() {
     return(
-      <div className="chat">
+      <div className="chat" style={{height: '300px'}}>
         <h3>Game Chat</h3>
         <Messages message={this.state.messages}/>
         <Input submit={this.messageSubmit}/>

@@ -5,6 +5,7 @@ class Input extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      messages: [],
       text: ''
     }
     this.changeHandler = this.changeHandler.bind(this)
@@ -13,6 +14,7 @@ class Input extends React.Component {
 
   changeHandler(e) {
     this.setState({text: e.target.value})
+    console.log(this.state.text)
   }
 
   handleSubmit(e) {
@@ -26,7 +28,7 @@ class Input extends React.Component {
 
   render() {
     return (
-      <div classname="message-form">
+      <div className="message-form">
         <form onSubmit={this.handleSubmit}>
           <input onChange={this.changeHandler} value={this.state.text} />
           <input type="submit" value="Send!" />
