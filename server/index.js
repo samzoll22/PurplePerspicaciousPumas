@@ -363,11 +363,11 @@ io.on('connection', (socket) => {
   // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
 =======
   //socket for the messages
-  // socket.on('send:mesaage', function (data) {
-  //   socket.broadcast.emit('send:message', {
-  //       text: data.text
-  //   });
-  // });
+  socket.on('send:mesaage', function (data) {
+    socket.broadcast.emit('send:message', {
+        text: data.text
+    });
+  });
 
 >>>>>>> added chat components into game.jsx
 

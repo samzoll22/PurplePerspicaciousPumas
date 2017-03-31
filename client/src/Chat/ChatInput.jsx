@@ -26,9 +26,10 @@ class Input extends React.Component {
 
   render() {
     return (
-      <div className="message-form">
+      <div classname="message-form">
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.changeHandler} value={this.state.text}></input>
+          <input onChange={this.changeHandler} value={this.state.text} />
+          <input type="submit" value="Send!" />
         </form>
       </div>
     )
