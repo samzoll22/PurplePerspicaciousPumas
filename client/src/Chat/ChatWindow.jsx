@@ -16,7 +16,7 @@ class ChatWindow extends React.Component {
     this.messageSubmit = this.messageSubmit.bind(this)
     this.messageReceive = this.messageReceive.bind(this)
 
-    socket.on('send:message', message => {this.messageReceive})
+    socket.on('send:message', message => {this.messageReceive(message)})
 
   }
 
@@ -24,13 +24,13 @@ class ChatWindow extends React.Component {
     var newMessage = this.state.messages
     newMessage.push(message)
     this.setState({messages: newMessage})
-    console.log(this.state.messages)
+    // console.log(this.state.messages)
   }
 
   messageSubmit(message) {
-    var newMessage = this.state.messages
-    newMessage.push(message)
-    this.setState({messages: newMessage})
+    // var newMessage = this.state.messages
+    // newMessage.push(message)
+    // this.setState({messages: newMessage})
     console.log(this.state.messages)
     socket.emit('send:message', message)
   }
