@@ -136,7 +136,7 @@ class Game extends React.Component {
         {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && this.state.pregame.status === null && <WaitingRoom game={this.state.game} user={this.state.username}/>}
 
 
-        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && this.state.pregame.status === false && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && (this.state.pregame.status === false || this.state.pregame.status === null) && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
       </div>
