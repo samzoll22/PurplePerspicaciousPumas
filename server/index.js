@@ -192,6 +192,7 @@ io.on('connection', (socket) => {
         // then, check num of players in players list
         // if it's 4 and gameStage is waiting
             // emit 'pregame' event and send number of seconds and pregame status to client
+<<<<<<< HEAD
         var seconds = 5;
         if (game.players.length === 4 && game.gameStage === 'waiting') {
           // update gameStage in db from waiting to playing
@@ -213,6 +214,21 @@ io.on('connection', (socket) => {
             }
           };
         var int = setInterval(onInt, 1000);
+=======
+            var x = 7;
+            var onInt = function () {
+              io.to(gameName).emit('pregame', {'seconds': x, 'status': true});
+              x--;
+              if (x === 0) {
+                clearInterval(int);
+              // emit 'start game' event and send the game instance obj
+                io.to(gameName).emit('start game', game);
+              }
+            };
+            var int = setInterval(onInt, 1000);
+          })
+        });
+>>>>>>> bug fix - disconnected users may reconnect and go back to their game
       } else {
         io.to(gameName).emit('update waiting room', game);
       }
