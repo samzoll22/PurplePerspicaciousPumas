@@ -47,10 +47,6 @@ class App extends React.Component {
             <Route path="/" component={Home} sendToLobby={this.sendToLobby}/>
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} sendToHome={this.sendToHome} disconnectTimeOut={this.state.disconnectTimeOut}/>
             <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} disconnectTimeOut={this.state.disconnectTimeOut} sendToLobby={this.sendToLobby}/>
-<<<<<<< HEAD
-
-=======
->>>>>>> implemented original team's disconnect which works. need to add the return lobby button function
             <Route path="/game/:gamename" component={Game} sendToLobby={this.sendToLobby}/>
             <Route path="/user" component={UserProfile} sendToLobby={this.sendToLobby}/>
           </Router>
