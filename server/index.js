@@ -198,7 +198,7 @@ io.on('connection', (socket) => {
           return queries.retrieveGameInstance(gameName)
           .then(function (game) {
             // emit 'pregame' event and send number of seconds and pregame status to client
-            var x = 7;
+            var x = 5;
             var onInt = function () {
               io.to(gameName).emit('pregame', {'seconds': x, 'status': true});
               x--;
@@ -348,6 +348,10 @@ io.on('connection', (socket) => {
   // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
 
   socket.on('disconnect', (data) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> commiting changes before making branch for disconnect lag fix
     var countAtDisconnect = Rooms[Sockets[socket]];
     var nameRoom = Sockets[socket];
     if (Rooms[Sockets[socket]]) {

@@ -35,7 +35,7 @@ class PlayingGame extends React.Component{
 
     if (nextProps) {
       let curRound = nextProps.game.currentRound;
-      
+
       if (nextProps.game.players[curRound] === nextProps.user) {
         this.setState({role: 'judge'})
       } else {
@@ -43,7 +43,7 @@ class PlayingGame extends React.Component{
       }
     } else {
       let curRound = this.props.game.currentRound;
-      
+
       if (this.props.game.players[curRound] === this.props.user) {
         this.setState({role: 'judge'})
       } else {
