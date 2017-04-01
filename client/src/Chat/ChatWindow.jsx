@@ -13,7 +13,6 @@ class ChatWindow extends React.Component {
       messages: []
     }
     this.messageSubmit = this.messageSubmit.bind(this)
-    // this.messageReceive = this.messageReceive.bind(this)
   }
 
   componentWillMount() {

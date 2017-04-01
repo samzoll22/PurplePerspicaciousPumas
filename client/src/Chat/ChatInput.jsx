@@ -22,7 +22,9 @@ class Input extends React.Component {
     var message = {
       text: this.state.text
     }
-    this.props.submit(message)
+    if (this.state.text !== '') {
+      this.props.submit(message)
+    }
     // this.props.messageReceive(message)
     this.setState({text: ''})
   }

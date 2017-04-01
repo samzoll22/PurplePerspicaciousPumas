@@ -5,7 +5,7 @@ var Messages = function(props) {
   // const allMessages = props.message.map((msg) => {
   //   <MessageListItem msg={msg} />
   // })
-  var height = {'height': '200px', 'width': '200px', 'overflow': 'auto', 'background-color': 'white'}
+  var height = {'height': '200px', 'overflow': 'auto', 'background-color': 'white'}
   console.log(props.message)
   return (
     <div className="all-messages" style={height}>
