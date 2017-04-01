@@ -189,42 +189,30 @@ io.on('connection', (socket) => {
     }).then(function () {
       return queries.retrieveGameInstance(gameName);
     }).then(function (game) {
-    // then, check num of players in players list
-      // if it's 4 and gameStage is waiting
-      if (game.players.length === 4 && game.gameStage === 'waiting') {
-        // update gameStage in db from waiting to playing
-        return queries.setGameInstanceGameStageToPlaying(gameName)
-        .then(function () {
-          return queries.retrieveGameInstance(gameName)
-          .then(function (game) {
-          // emit 'start game' event and send the game instance obj
-            // create a new socket here?
-              // countdown function here setTimeout and trigger a different state to render on the front end
-
-              var x = 7;
-              var onInt = function () {
-                io.to(gameName).emit('pregame', {'seconds': x, 'status': true});
-                x--;
-                if (x === 0) {
-                  clearInterval(int);
+        // then, check num of players in players list
+        // if it's 4 and gameStage is waiting
+            // emit 'pregame' event and send number of seconds and pregame status to client
+        var seconds = 5;
+        if (game.players.length === 4 && game.gameStage === 'waiting') {
+          // update gameStage in db from waiting to playing
+          io.to(gameName).emit('update waiting room', game);
+          var onInt = function () {
+            if (seconds === 0) {
+              clearInterval(int);
+              return queries.setGameInstanceGameStageToPlaying(gameName)
+              .then(function () {
+                return queries.retrieveGameInstance(gameName)
+                .then(function (game) {
+                  // emit 'start game' event and send the game instance obj
                   io.to(gameName).emit('start game', game);
-                }
-              };
-
-              let int = setInterval(onInt, 1000);
-
-              // let x = 5;
-              // int = setInterval(function () {
-              //   io.to(gameName).emit('pregame', 1000)
-              //   x--;
-              //   if (x === 0) {
-              //     clearInterval(int);
-              //     io.to(gameName).emit('start game', game);
-
-
-              // io.to(gameName).emit('start game', game);
-          })
-        });
+                })
+              });
+            } else {
+              io.to(gameName).emit('countdown to start game', seconds);
+              seconds--;
+            }
+          };
+        var int = setInterval(onInt, 1000);
       } else {
         io.to(gameName).emit('update waiting room', game);
       }
@@ -327,7 +315,7 @@ io.on('connection', (socket) => {
       throw error;
     })
   })
-  //
+
   socket.on('ready to move on', (data) => {
     var gameName = data.gameName;
     var username = data.username;
@@ -359,39 +347,36 @@ io.on('connection', (socket) => {
     })
   })
 
+  // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
 
-  // The commented out function is meant to be a way to handle disconnects
-  // It requires some debugging to be functional, and is therefore currently
-  // commented out. When a user disconnects it should check every second
-  // to see if the user has reconnected, but currently the count system
-  // is not properly incrementing.
   socket.on('disconnect', (data) => {
-    // if (Rooms[Sockets[socket]]) {
-    //   Rooms[Sockets[socket]]--;
-    //   var timer = 60;
-    //   var disconnectTimeOut = function() {
-    //     setTimeout(function(){
-    //       if (timer === 0 && Rooms[Sockets[socket]] < 4) {
-    //         queries.setGameInstanceGameStageToGameOver(Sockets[socket])
-    //         .then(function(){
-    //             io.to(Sockets[socket]).emit('disconnectTimeOut');
-    //         })
-    //       } else {
-    //         if (Rooms[Sockets[socket]] < 4) {
-    //           timer = timer - 1;
-    //           disconnectTimeOut();
-    //         }
-    //       }
-    //     }, 1000);
-    //   }
-    //   queries.retrieveGameInstance(Sockets[socket])
-    //   .then(function(game) {
-    //     if (game.gameStage === 'playing') {
-    //       disconnectTimeOut();
-    //     }
-    //   });
-    // }
-
+    var countAtDisconnect = Rooms[Sockets[socket]];
+    var nameRoom = Sockets[socket];
+    if (Rooms[Sockets[socket]]) {
+      Rooms[Sockets[socket]]--;
+      var timer = 30;
+      var disconnectTimeOut = function() {
+        setTimeout(function(){
+          if (timer === 0 && countAtDisconnect !== Rooms[Sockets[socket]]) {
+            queries.setGameInstanceGameStageToGameOver(Sockets[socket])
+            .then(function(){
+                io.to(Sockets[socket]).emit('disconnectTimeOut');
+            })
+          } else {
+            if (countAtDisconnect !== Rooms[Sockets[socket]]) {
+              timer = timer - 1;
+              disconnectTimeOut();
+            }
+          }
+        }, 1000);
+      }
+      queries.retrieveGameInstance(Sockets[socket])
+      .then(function(game) {
+        if (game.gameStage === 'playing') {
+          disconnectTimeOut();
+        }
+      });
+    }
     console.log('a user disconnected', data);
   });
 });

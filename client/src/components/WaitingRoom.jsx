@@ -8,6 +8,9 @@ const WaitingRoom = (props) => (
   <PageHeader>{props.game.gameName} <small>Waiting Room</small></PageHeader>
     <h3>Number of Players: {props.game.players.length} / 4</h3>
     <br />
+
+    {props.seconds && <h4>Game starts in {props.seconds} seconds!</h4>}
+
     <h4>Current Players:</h4>
     <Col sm={4} smOffset={4}>
       <ListGroup>
