@@ -46,8 +46,11 @@ class App extends React.Component {
         <div>
           <Router history={hashHistory}>
             <Route path="/" component={Home} sendToLobby={this.sendToLobby}/>
+
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} sendToHome={this.sendToHome} disconnectTimeOut={this.state.disconnectTimeOut}/>
-            <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} disconnectTimeOut={this.state.disconnectTimeOut} sendToLobby={this.sendToLobby}/>
+
+            <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} disconnectTimeOut={this.state.disconnectTimeOut} sendToLobby={this.sendToLobby} sendToHome={this.sendToHome} />
+
             <Route path="/game/:gamename" component={Game} sendToLobby={this.sendToLobby}/>
             <Route path="/user/:username" component={UserProfile} sendToLobby={this.sendToLobby}/>
           </Router>
@@ -55,7 +58,6 @@ class App extends React.Component {
       );
     }
 }
-             //   <SignUp onSubmit={this.handleSignUp}/>
 
 ReactDOM.render(
   <App/>,
