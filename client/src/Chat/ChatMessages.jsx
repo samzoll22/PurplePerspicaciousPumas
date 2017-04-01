@@ -7,11 +7,10 @@ var Messages = function(props) {
     <MessageListItem key={i} msg={msg} />
   })
 
-  console.log("this is my props", props);
   return (
-    <div className="all-messages">
+    <ul className="all-messages">
       {allMessages}
-    </div>
+    </ul>
   )
 }
 
