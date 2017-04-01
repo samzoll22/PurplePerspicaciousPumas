@@ -36,11 +36,12 @@ class App extends React.Component {
       hashHistory.push(/game/ + gameName);
     }
 
-    sendToProfile(user) {
-      hashHistory.push('/user')
+    sendToProfile(username) {
+      hashHistory.push('/user/' + username);
     }
 
     render() {
+
       return (
         <div>
           <Router history={hashHistory}>
@@ -48,7 +49,7 @@ class App extends React.Component {
             <Route path="/lobby" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} sendToHome={this.sendToHome} disconnectTimeOut={this.state.disconnectTimeOut}/>
             <Route path="/lobby/:disconnectTimeOut" component={Lobby} sendToGame={this.sendToGame} sendToProfile={this.sendToProfile} disconnectTimeOut={this.state.disconnectTimeOut} sendToLobby={this.sendToLobby}/>
             <Route path="/game/:gamename" component={Game} sendToLobby={this.sendToLobby}/>
-            <Route path="/user" component={UserProfile} sendToLobby={this.sendToLobby}/>
+            <Route path="/user/:username" component={UserProfile} sendToLobby={this.sendToLobby}/>
           </Router>
         </div>
       );

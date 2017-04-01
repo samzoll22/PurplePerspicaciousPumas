@@ -37,7 +37,9 @@ var userSchema = new Schema({
   achievements: Array,
   gamesWon: Number,
   gamesLost: Number,
-  gamesParticipated: Number
+  gamesParticipated: Number,
+  timeSpentPlaying: Number,
+  
 });
 
 userSchema.plugin(passportLocalMongoose);

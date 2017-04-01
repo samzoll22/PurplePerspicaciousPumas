@@ -152,13 +152,25 @@ app.get('/logout', function(req, res) {
   });
 })
 
-
 //don't need the app.options
 
 var server = app.listen(port, function() {
   console.log('App is listening on port: ', port);
 });
 //don't need the app.options
+
+app.get('/userprofile', function(req, res) {
+  console.log('get request from user profile received', req.query.username)
+  var user = req.query.username; 
+  var promise = User.find({username: user}).exec();
+
+  promise.then(function(userinfo){
+    res.send(userinfo)
+  }).catch(function(err){
+    res.send('not found')
+  })
+
+});
 
 //SOCKETS
 
