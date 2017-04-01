@@ -34,14 +34,22 @@ class ChatWindow extends React.Component {
   }
 
   render() {
+    const divStyle = {
+      position: 'relative',
+      display: 'inline-block'
+    }
+    const componentStyle = {
+      position: 'absolute',
+      width: '15%'
+    }
     return(
       <div>
         <div className="chat">
           <h3>Game Chat</h3>
         </div>
-        <div>
-          <Messages message={this.state.messages} />
-          <Input userName={this.props.userName} submit={this.messageSubmit} />
+        <div style={divStyle}>
+          <Messages message={this.state.messages} style={componentStyle} />
+          <Input userName={this.props.userName} submit={this.messageSubmit} style={componentStyle} />
         </div>
       </div>
     )
