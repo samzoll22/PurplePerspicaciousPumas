@@ -23,7 +23,7 @@ class Winner extends React.Component {
 
     return (
       <Col>
-        {this.props.secondsToRound && <h4>Game starts in {this.props.secondsToRound} seconds!</h4>}
+        {this.props.secondsToRound && <h4>Next round starts in {this.props.secondsToRound} seconds!</h4>}
         {results}
       </Col>
     )
