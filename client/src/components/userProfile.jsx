@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import { Button, Form, FormGroup, Col, FormControl, ControlLabel, PageHeader } from 'react-bootstrap';
 import GameStatisticsPane from './GameStatisticsPane.jsx';
 import AchievementPane from './AchievementPane.jsx';
 import TabButton from './tabButton.jsx';
@@ -69,7 +70,8 @@ class UserProfile extends React.Component {
   render(){
   	return (
   	  <div>
-  	    <div>{this.props.params.username}</div>
+        <Button id="return-to-lobby" bsSize="small" onClick={this.props.route.sendToLobby}>Return To Lobby</Button>
+        <div>{this.props.params.username}</div>
   	    <TabButton displayName='Achievement' handleClick={this.handleClickAchievementTab}/>
   	    <TabButton displayName='Game Statistics' handleClick={this.handleClickGameStatisticsTab}/>
   	    {this.state.gameStatisticsTabActive && <GameStatisticsPane data={this.state.userDummy}/>}
