@@ -16,7 +16,7 @@ class LogOut extends React.Component {
       url: '/logout',
       success: (data) => {
         console.log('see you next time!')
-        this.props.sendToHome()
+        this.props.sendToHome
       },
       error: () => {
         console.log('looks like you\'re stuck with us')

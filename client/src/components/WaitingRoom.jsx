@@ -1,11 +1,14 @@
 'use strict';
 import React from 'react';
 import Rules from './Rules.jsx';
-import { Col, PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Col, PageHeader, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 
 const WaitingRoom = (props) => (
   <Col id='waiting-room'>
-  <PageHeader>{props.game.gameName} <small>Waiting Room</small></PageHeader>
+  <PageHeader>{props.game.gameName} <small>Waiting Room</small>
+
+    </PageHeader>
+    <Button id="log-out" bsSize="small" onClick={props.sendToLobby} >Back To Lobby</Button>
     <h3>Number of Players: {props.game.players.length} / 4</h3>
     <br />
 
@@ -14,7 +17,7 @@ const WaitingRoom = (props) => (
     <h4>Current Players:</h4>
     <Col sm={4} smOffset={4}>
       <ListGroup>
-        {props.game.players.map( (player) => <ListGroupItem>{player}</ListGroupItem>)}
+        {props.game.players.map( (player, key) => <ListGroupItem>{player, key}</ListGroupItem>)}
       </ListGroup>
     </Col>
     <Col sm={6} smOffset={3}>
