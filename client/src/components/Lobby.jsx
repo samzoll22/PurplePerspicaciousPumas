@@ -67,6 +67,7 @@ class Lobby extends React.Component {
       <container>
         <Col id="lobby" sm={12}>
           {this.state.username ? (<PageHeader>Welcome {this.state.username} !</PageHeader>) : (<PageHeader>Lobby</PageHeader>)}
+          <Button id="log-out" bsSize="small" onClick={()=>(this.props.route.sendToProfile(this.state.username))}>My Profile</Button>
           <LogOut sendToHome={this.props.route.sendToHome}/>
           {this.props.params.disconnectTimeOut && <PlayerDisconnected/>}
           <CreateGame sendToGame={this.props.route.sendToGame}/>
