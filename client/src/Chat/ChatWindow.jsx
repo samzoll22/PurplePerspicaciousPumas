@@ -1,5 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
 import Input from './ChatInput.jsx';
 import Messages from './ChatMessages.jsx';
 import io from 'socket.io-client';
@@ -14,33 +13,39 @@ class ChatWindow extends React.Component {
       messages: []
     }
     this.messageSubmit = this.messageSubmit.bind(this)
-    this.messageReceive = this.messageReceive.bind(this)
-
-    socket.on('send:message', message => {this.messageReceive(message)})
-
+    // this.messageReceive = this.messageReceive.bind(this)
   }
 
-  messageReceive(message) {
-    var newMessage = this.state.messages
-    newMessage.push(message)
-    this.setState({messages: newMessage})
-    // console.log(this.state.messages)
+  componentWillMount() {
+
+    console.log('componentWillMount has run')
+    socket.on('send:message', (message) =>{
+      console.log(message);
+      var newMessage = this.state.messages
+      newMessage.push(message)
+      this.setState({messages: newMessage})
+    })
+
   }
 
   messageSubmit(message) {
-    // var newMessage = this.state.messages
-    // newMessage.push(message)
-    // this.setState({messages: newMessage})
+    var newMessage = this.state.messages
+    newMessage.push(message)
+    this.setState({messages: newMessage})
     console.log(this.state.messages)
     socket.emit('send:message', message)
   }
 
   render() {
     return(
-      <div className="chat" style={{height: '300px'}}>
-        <h3>Game Chat</h3>
-        <Messages message={this.state.messages}/>
-        <Input submit={this.messageSubmit} />
+      <div>
+        <div className="chat">
+          <h3>Game Chat</h3>
+        </div>
+        <div>
+          <Messages message={this.state.messages}/>
+          <Input submit={this.messageSubmit} />
+        </div>
       </div>
     )
   }

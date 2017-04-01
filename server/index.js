@@ -359,8 +359,11 @@ io.on('connection', (socket) => {
     })
   })
 
+
+  //socket for the messages
   socket.on('send:message', function (data) {
     console.log('success');
+    console.log(data);
     socket.broadcast.emit('send:message', {
         text: data.text
     });
