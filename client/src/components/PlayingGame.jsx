@@ -62,7 +62,9 @@ class PlayingGame extends React.Component{
 
     return (
       <Col id="playing-game">
-        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1} - Judge: {curJudge}</small></PageHeader>
+        <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1} - Judge: {curJudge}</small>
+
+        </PageHeader>
           <Col sm={6} smOffset={3}>
             <h4>Scoreboard</h4>
             <Score game={this.props.game}/>

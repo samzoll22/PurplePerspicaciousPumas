@@ -22,7 +22,7 @@ class Score extends React.Component {
         scores[round.winner]++;
       }
     });
-
+    console.log('PLAYER SCORE', scores)
     return (
       <Table striped bordered condensed hover>
         <tbody>
