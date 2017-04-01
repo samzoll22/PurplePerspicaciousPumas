@@ -10,13 +10,13 @@ class LogOut extends React.Component {
   }
 
   destroySession() {
-
+    var context = this;
     $.ajax({
       method: 'GET',
       url: '/logout',
       success: (data) => {
         console.log('see you next time!')
-        this.props.sendToHome
+        context.props.sendToHome()
       },
       error: () => {
         console.log('looks like you\'re stuck with us')

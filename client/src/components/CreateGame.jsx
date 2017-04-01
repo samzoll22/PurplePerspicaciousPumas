@@ -77,7 +77,7 @@ class CreateGame extends React.Component {
       <div id="create-game">
         <Button onClick={this.showModal} block ><h4>Start a New Game</h4></Button>
           {this.state.error && errorMessage}
-          <Modal show={this.state.show} onHide={this.showModal} className={"modal-container"} >
+          <Modal show={this.state.show} onClick={this.showModal} className={"modal-container"} >
             <Modal.Header style={{"text-align":"center"}}closeButton>
               <Modal.Title >Name Your Game and Select Game Mode</Modal.Title>
             </Modal.Header>
