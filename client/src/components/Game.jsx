@@ -39,7 +39,6 @@ class Game extends React.Component {
     })
 
     socket.on('start game', (gameObj) => {
-      console.log('start game is called');
       this.setState({game: gameObj});
     })
 
@@ -54,7 +53,6 @@ class Game extends React.Component {
     })
     socket.on('countdown to next round', (secondsLeft) => {
       this.setState({secondsToRound: secondsLeft})
-      console.log('countdown is being called')
     })
     socket.on('start next round', (gameObj) => {
       this.setState({game: gameObj, secondsToRound: null});
@@ -63,9 +61,6 @@ class Game extends React.Component {
       this.setState({game: gameObj});
     })
     socket.on('disconnectTimeOut', () => {
-      // this function is related to the commented out function
-      // in server/index.js
-      console.log('disconnectTimeOut');
       this.props.route.sendToLobby.call(this, true);
     })
 
@@ -116,11 +111,6 @@ class Game extends React.Component {
 
   handleJudgeSelection(winner) {
     socket.emit('judge select and ready to move on', {gameName: this.props.params.gamename, winner: winner});
-    console.log('judge selection being called')
-  }
-
-  handleReadyToMoveOn() {
-    socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
   }
 
   handlePromptSubmission(prompt) {
@@ -130,12 +120,12 @@ class Game extends React.Component {
 
 
   render() {
-    console.log('outside playing game', this.state.secondsToRound)
+
     return (
       <div id="game">
         {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom game={this.state.game} user={this.state.username} seconds={this.state.seconds} sendToLobby={this.props.route.sendToLobby} />}
 
-        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} secondsToRound={this.state.secondsToRound} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} secondsToRound={this.state.secondsToRound} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection}/>}
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
 

@@ -59,7 +59,7 @@ class PlayingGame extends React.Component{
     var stage = this.props.game.rounds[curRound].stage;
     var responses = this.props.game.rounds[curRound].responses;
     var winner = this.props.game.rounds[curRound].winner;
-    console.log('inside playing game', this.props.secondsToRound)
+
     return (
       <Col id="playing-game">
         <PageHeader>{this.props.game.gameName}: <small>Round {this.props.game.currentRound + 1} - Judge: {curJudge}</small></PageHeader>
@@ -77,7 +77,7 @@ class PlayingGame extends React.Component{
         {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
         {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
         {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
-        {stage === 2 && <Winner responses={responses} winner={winner} handleReadyToMoveOn={this.props.handleReadyToMoveOn} secondsToRound={this.props.secondsToRound}/>}
+        {stage === 2 && <Winner responses={responses} winner={winner} secondsToRound={this.props.secondsToRound}/>}
         </Col>
       </Col>
     )
