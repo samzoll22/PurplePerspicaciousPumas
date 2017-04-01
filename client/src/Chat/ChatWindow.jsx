@@ -17,7 +17,6 @@ class ChatWindow extends React.Component {
   }
 
   componentWillMount() {
-
     console.log('componentWillMount has run')
     socket.on('send:message', (message) =>{
       console.log(message);
@@ -25,7 +24,6 @@ class ChatWindow extends React.Component {
       newMessage.push(message)
       this.setState({messages: newMessage})
     })
-
   }
 
   messageSubmit(message) {
