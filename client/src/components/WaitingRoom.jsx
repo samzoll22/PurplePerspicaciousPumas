@@ -17,7 +17,7 @@ const WaitingRoom = (props) => (
     <h4>Current Players:</h4>
     <Col sm={4} smOffset={4}>
       <ListGroup>
-        {props.game.players.map( (player, key) => <ListGroupItem>{player, key}</ListGroupItem>)}
+        {props.game.players.map( (player) => <ListGroupItem>{player}</ListGroupItem>)}
       </ListGroup>
     </Col>
     <Col sm={6} smOffset={3}>

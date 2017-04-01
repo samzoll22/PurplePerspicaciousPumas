@@ -58,7 +58,6 @@ class App extends React.Component {
       );
     }
 }
-             //   <SignUp onSubmit={this.handleSignUp}/>
 
 ReactDOM.render(
   <App/>,
