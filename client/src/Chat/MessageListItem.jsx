@@ -5,13 +5,12 @@ var MessageListItem = function(props) {
   var style = {
     backgroundColor: '#C4D8E2',
     borderRadius: '5px',
-    padding: '5px',
-    marginLeft: '100%',
-    margin: '4px',
+    padding: '10px',
+    margin: '3px 20px',
     textAlign: 'right',
     float: 'right',
     clear: 'right'
-  }
+  } 
 
   var pStyle = {
     textDecoration: 'underline'
@@ -19,7 +18,7 @@ var MessageListItem = function(props) {
   return(
 
     <div className="message" style={style}>
-      <p style={pStyle}>{props.msg.username}: </p>
+      <p style={pStyle}>{props.msg.username}</p>
       <span>{props.msg.text}</span>
     </div>
   )
