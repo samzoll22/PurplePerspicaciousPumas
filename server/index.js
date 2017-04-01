@@ -284,12 +284,11 @@ io.on('connection', (socket) => {
   })
 
 
-  // on 'judge selection'
+  // on 'judge selection', automatically make players ready to move on and begin a 5 second timer
   socket.on('judge select and ready to move on', (data) => {
     var gameName = data.gameName;
     var winner = data.winner;
     var username = data.username;
-    var secondsToRound = 5;
     queries.retrieveGameInstance(gameName)
     .then(function (game) {
       var currentRound = game.currentRound;
@@ -303,35 +302,34 @@ io.on('connection', (socket) => {
       }
       queries.updateRounds(gameName, Rounds)
       .then(function () {
-          currentRound++;
-          queries.updateCurrentRound(gameName, currentRound).then(function() {
-            if (game.currentRound < 3) {
-              // put the timer in here
-              var inGameTimer = function() {
-                if (secondsToRound === 0) {
-                  clearInterval(interval);
-                  queries.retrieveGameInstance(gameName).then(function(game) {
-                    io.to(gameName).emit(
-                      'start next round', game);
-                  })
-                } else {
-                  queries.retrieveGameInstance(gameName).then(function(game) {
-                    io.to(gameName).emit('countdown to next round', secondsToRound);
-                    secondsToRound--;
-                  })
-                }
-              }
-              var interval = setInterval(inGameTimer, 1000);
-            } else {
-              queries.setGameInstanceGameStageToGameOver(gameName).then(function () {
-                queries.retrieveGameInstance(gameName).then(function (game) {
-                  io.to(gameName).emit('game over', game);
+        currentRound++;
+        queries.updateCurrentRound(gameName, currentRound).then(function() {
+          if (game.currentRound < 3) {
+            var secondsToRound = 5;
+            // put the timer in here
+            var inGameTimer = function() {
+              if (secondsToRound === 0) {
+                clearInterval(interval);
+                queries.retrieveGameInstance(gameName).then(function(game) {
+                  io.to(gameName).emit(
+                    'start next round', game);
                 })
-              })
+              } else {
+                queries.retrieveGameInstance(gameName).then(function(game) {
+                  io.to(gameName).emit('countdown to next round', secondsToRound);
+                  secondsToRound--;
+                })
+              }
             }
-          })
-
-        .catch(function(error) {
+            var interval = setInterval(inGameTimer, 1000);
+          } else {
+            queries.setGameInstanceGameStageToGameOver(gameName).then(function () {
+              queries.retrieveGameInstance(gameName).then(function (game) {
+                io.to(gameName).emit('game over', game);
+              })
+            })
+          }
+        }).catch(function(error) {
           console.log(error);
           throw error;
         })
@@ -339,47 +337,7 @@ io.on('connection', (socket) => {
     });
   });
 
-  socket.on('ready to move on', (data) => {
-    var gameName = data.gameName;
-    var username = data.username;
-    queries.retrieveGameInstance(gameName)
-    .then(function(game) {
-      var currentRound = game.currentRound;
-      var Rounds = game.rounds.slice(0);
-
-      if (Rounds[currentRound].ready.indexOf(username) === -1) {
-
-        Rounds[currentRound].ready.push(username);
-        queries.updateRounds(gameName, Rounds)
-        .then(function() {
-          if (Rounds[currentRound].ready.length === 4) {
-            currentRound++;
-            queries.updateCurrentRound(gameName, currentRound)
-            .then(function() {
-              queries.retrieveGameInstance(gameName)
-              .then(function(game) {
-                io.to(gameName).emit('start next round', game);
-              })
-            })
-          }
-        })
-      }
-    }).catch(function(error) {
-      console.log(error);
-      throw error;
-    })
-  })
-
-
-  //socket for the messages
-  socket.on('send:message', function (data) {
-    console.log('success');
-    console.log(data);
-    socket.broadcast.emit('send:message', {
-        username: data.username,
-        text: data.text
-    });
-  });
+  // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
 
   socket.on('disconnect', (data) => {
     var countAtDisconnect = Rooms[Sockets[socket]];

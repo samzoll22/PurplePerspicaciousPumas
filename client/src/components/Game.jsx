@@ -28,7 +28,6 @@ class Game extends React.Component {
     this.handleResponse = this.handleResponse.bind(this);
     this.handlePromptSubmission = this.handlePromptSubmission.bind(this);
     this.handleJudgeSelection = this.handleJudgeSelection.bind(this);
-    this.handleReadyToMoveOn = this.handleReadyToMoveOn.bind(this);
 
     socket.on('update waiting room', (gameObj) => {
       this.setState({game: gameObj});
