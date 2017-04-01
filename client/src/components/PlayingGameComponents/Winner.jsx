@@ -16,8 +16,8 @@ class Winner extends React.Component {
       <ListGroup id="winner">
         <h4>Results</h4>
         {this.props.responses.map((response) => (
-          <ListGroupItem bsStyle={response[1] === this.props.winner ? 'success' : 'danger'}> 
-            <b>{response[1]}:</b> {response[0]} {response[1] === this.props.winner && <b>(WINNER)</b> } 
+          <ListGroupItem bsStyle={response[1] === this.props.winner ? 'success' : 'danger'}>
+            <b>{response[1]}:</b> {response[0]} {response[1] === this.props.winner && <b>(WINNER)</b> }
           </ListGroupItem>
         ))}
           <br />
@@ -25,7 +25,7 @@ class Winner extends React.Component {
     )
 
     const confirmation = <p><b>Hold tight - the next round will begin as soon as all players are ready to move on!</b></p>
-    
+
     const moveOnButton = (
         <Button onClick={() => {
             this.setState({readyToMoveOn: true})
@@ -37,11 +37,12 @@ class Winner extends React.Component {
     return (
       <Col>
         {results}
+        {this.props.secondsToRound && <h4>Game starts in {this.props.secondsToRound} seconds!</h4>}
         {!this.state.readyToMoveOn && moveOnButton}
         {this.state.readyToMoveOn && confirmation}
       </Col>
     )
-    
+
   }
 }
 

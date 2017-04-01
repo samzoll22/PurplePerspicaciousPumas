@@ -288,6 +288,8 @@ io.on('connection', (socket) => {
   socket.on('judge selection', (data) => {
     var gameName = data.gameName;
     var winner = data.winner;
+    var username = data.username;
+    var secondsToRound = 5;
     queries.retrieveGameInstance(gameName)
     .then(function (game) {
       var currentRound = game.currentRound;
@@ -301,6 +303,16 @@ io.on('connection', (socket) => {
         .then(function (game) {
             if (game.currentRound < 3) {
               io.to(gameName).emit('winner chosen', game);
+              // put the timer in here
+              var inGameTimer = function() {
+                if (seconds === 0) {
+                  io.to(gameName).emit(
+                    'start next round', game);
+                } else {
+                  io.to(gameName).emit('countdown to next round', secondsToRound);
+                  secondsToRound--;
+                }
+              }
             } else {
               queries.setGameInstanceGameStageToGameOver(gameName).then(function () {
                 queries.retrieveGameInstance(gameName).then(function (game) {

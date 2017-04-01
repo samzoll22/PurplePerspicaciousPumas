@@ -14,8 +14,8 @@ class ChooseWinner extends React.Component {
         <h4>Responses</h4>
         {this.props.responses.map((response) => (
           <Col>
-            <ListGroupItem onClick={this.props.handleJudgeSelection.bind(null, response[1])}> 
-              {response[0]} 
+            <ListGroupItem onClick={this.props.handleJudgeSelection.bind(null, response[1])}>
+              {response[0]}
             </ListGroupItem>
             <br />
           </Col>
