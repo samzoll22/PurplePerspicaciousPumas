@@ -160,6 +160,19 @@ var server = app.listen(port, function() {
 });
 //don't need the app.options
 
+app.get('/userprofile', function(req, res) {
+  console.log('get request from user profile received', req.query.username)
+  var user = req.query.username;
+  var promise = User.find({username: user}).exec();
+
+  promise.then(function(userinfo){
+    res.send(userinfo)
+  }).catch(function(err){
+    res.send('not found')
+  })
+
+});
+
 //SOCKETS
 
 var io = require('socket.io')(server);
@@ -338,6 +351,16 @@ io.on('connection', (socket) => {
   });
 
   // On a disconnect, if the user does not reconnect to the same game in 30 seconds, all users will be kicked out.
+
+  //socket for the messages
+  socket.on('send:message', function (data) {
+    console.log('success');
+    console.log(data);
+    socket.broadcast.emit('send:message', {
+        username: data.username,
+        text: data.text
+    });
+  });
 
   socket.on('disconnect', (data) => {
     var countAtDisconnect = Rooms[Sockets[socket]];
