@@ -285,7 +285,7 @@ io.on('connection', (socket) => {
 
 
   // on 'judge selection'
-  socket.on('judge selection', (data) => {
+  socket.on('judge select and ready to move on', (data) => {
     var gameName = data.gameName;
     var winner = data.winner;
     var username = data.username;
@@ -297,22 +297,31 @@ io.on('connection', (socket) => {
       var Rounds = game.rounds.slice(0);
       Rounds[currentRound].winner = winner;
       Rounds[currentRound].stage++;
+      io.to(gameName).emit('winner chosen', game);
+      for (var i=0; i<game.players.length; i++) {
+        Rounds[currentRound].ready.push(game.players[i]);
+      }
       queries.updateRounds(gameName, Rounds)
       .then(function () {
-        queries.retrieveGameInstance(gameName)
-        .then(function (game) {
+          currentRound++;
+          queries.updateCurrentRound(gameName, currentRound).then(function() {
             if (game.currentRound < 3) {
-              io.to(gameName).emit('winner chosen', game);
               // put the timer in here
               var inGameTimer = function() {
-                if (seconds === 0) {
-                  io.to(gameName).emit(
-                    'start next round', game);
+                if (secondsToRound === 0) {
+                  clearInterval(interval);
+                  queries.retrieveGameInstance(gameName).then(function(game) {
+                    io.to(gameName).emit(
+                      'start next round', game);
+                  })
                 } else {
-                  io.to(gameName).emit('countdown to next round', secondsToRound);
-                  secondsToRound--;
+                  queries.retrieveGameInstance(gameName).then(function(game) {
+                    io.to(gameName).emit('countdown to next round', secondsToRound);
+                    secondsToRound--;
+                  })
                 }
               }
+              var interval = setInterval(inGameTimer, 1000);
             } else {
               queries.setGameInstanceGameStageToGameOver(gameName).then(function () {
                 queries.retrieveGameInstance(gameName).then(function (game) {
@@ -321,12 +330,14 @@ io.on('connection', (socket) => {
               })
             }
           })
+
+        .catch(function(error) {
+          console.log(error);
+          throw error;
         })
-    }).catch(function(error) {
-      console.log(error);
-      throw error;
-    })
-  })
+      });
+    });
+  });
 
   socket.on('ready to move on', (data) => {
     var gameName = data.gameName;

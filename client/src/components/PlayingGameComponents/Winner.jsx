@@ -4,13 +4,14 @@ import { ListGroup, ListGroupItem, Col, Button } from 'react-bootstrap';
 
 class Winner extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      readyToMoveOn: false
-    }
+    super(props);
+    // this.state = {
+    //   readyToMoveOn: false
+    // }
   }
 
   render() {
+    console.log('inside winner', this.props.secondsToRound);
 
     const results = (
       <ListGroup id="winner">
@@ -24,22 +25,20 @@ class Winner extends React.Component {
       </ListGroup>
     )
 
-    const confirmation = <p><b>Hold tight - the next round will begin as soon as all players are ready to move on!</b></p>
+    // const confirmation = <p><b>Hold tight - the next round will begin as soon as all players are ready to move on!</b></p>
 
-    const moveOnButton = (
-        <Button onClick={() => {
-            this.setState({readyToMoveOn: true})
-            this.props.handleReadyToMoveOn();
-          }
-        }>I'm Ready to Move On!</Button>
-    )
+    // const moveOnButton = (
+    //     <Button onClick={() => {
+    //         this.setState({readyToMoveOn: true})
+    //         this.props.handleReadyToMoveOn();
+    //       }
+    //     }>I'm Ready to Move On!</Button>
+    // )
 
     return (
       <Col>
-        {results}
         {this.props.secondsToRound && <h4>Game starts in {this.props.secondsToRound} seconds!</h4>}
-        {!this.state.readyToMoveOn && moveOnButton}
-        {this.state.readyToMoveOn && confirmation}
+        {results}
       </Col>
     )
 
@@ -47,6 +46,8 @@ class Winner extends React.Component {
 }
 
 
+        // {!this.state.readyToMoveOn && moveOnButton}
+        // {this.state.readyToMoveOn && confirmation}
 
 
 

@@ -54,9 +54,10 @@ class Game extends React.Component {
     })
     socket.on('countdown to next round', (secondsLeft) => {
       this.setState({secondsToRound: secondsLeft})
+      console.log('countdown is being called')
     })
     socket.on('start next round', (gameObj) => {
-      this.setState({game: gameObj});
+      this.setState({game: gameObj, secondsToRound: null});
     })
     socket.on('game over', (gameObj) => {
       this.setState({game: gameObj});
@@ -69,10 +70,6 @@ class Game extends React.Component {
     })
 
 
-  }
-
-  gameTransition(preGameObj) {
-    this.setState({pregame: preGameObj});
   }
 
   componentDidMount() {
@@ -118,7 +115,8 @@ class Game extends React.Component {
   }
 
   handleJudgeSelection(winner) {
-    socket.emit('judge selection', {gameName: this.props.params.gamename, winner: winner});
+    socket.emit('judge select and ready to move on', {gameName: this.props.params.gamename, winner: winner});
+    console.log('judge selection being called')
   }
 
   handleReadyToMoveOn() {
@@ -132,6 +130,7 @@ class Game extends React.Component {
 
 
   render() {
+    console.log('outside playing game', this.state.secondsToRound)
     return (
       <div id="game">
         {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom game={this.state.game} user={this.state.username} seconds={this.state.seconds} sendToLobby={this.props.route.sendToLobby} />}
