@@ -365,6 +365,7 @@ io.on('connection', (socket) => {
     console.log('success');
     console.log(data);
     socket.broadcast.emit('send:message', {
+        username: data.username,
         text: data.text
     });
   });

@@ -6,7 +6,7 @@ var Messages = function(props) {
   //   <MessageListItem msg={msg} />
   // })
   var height = {'height': '200px', 'overflow': 'auto', 'background-color': 'white'}
-  console.log(props.message)
+  console.log(props.userName)
   return (
     <div className="all-messages" style={height}>
       {props.message.map((msg, i) => (

@@ -40,8 +40,8 @@ class ChatWindow extends React.Component {
           <h3>Game Chat</h3>
         </div>
         <div>
-          <Messages message={this.state.messages}/>
-          <Input submit={this.messageSubmit} />
+          <Messages message={this.state.messages} />
+          <Input userName={this.props.userName} submit={this.messageSubmit} />
         </div>
       </div>
     )

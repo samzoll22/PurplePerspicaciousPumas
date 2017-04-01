@@ -20,6 +20,7 @@ class Input extends React.Component {
 //preventDefault() prevents the native HTML form from refreshing the page when it is submitted
     e.preventDefault();
     var message = {
+      username: this.props.userName,
       text: this.state.text
     }
     if (this.state.text !== '') {
