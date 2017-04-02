@@ -49,7 +49,7 @@ class ChatWindow extends React.Component {
             <h3>Game Chat</h3>
           </div>
           <div style={divStyle}>
-            <Messages message={this.state.messages} style={componentStyle} />
+            <Messages message={this.state.messages} style={componentStyle} userName={this.props.userName}/>
             <Input userName={this.props.userName} submit={this.messageSubmit} style={componentStyle} />
           </div>
       </div>

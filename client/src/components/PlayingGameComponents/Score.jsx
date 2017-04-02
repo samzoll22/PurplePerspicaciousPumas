@@ -23,26 +23,13 @@ class Score extends React.Component {
       }
     });
 
-    var dynamicStyle = {};
-    // if (scores) {
-    //   if (scores[username] === 0) {
-    //     dynamicStyle = {"background-color":"#e5edf9", "color":"#474747" }
-    //   } else if (scores[username] === 1) {
-    //     dynamicStyle = {"background-color":"#80c9d6", "color":"#3a5d63"}
-    //   } else if (scores[username] === 2) {
-    //     dynamicStyle = {"background-color":"#5fccb0", "color":"#466d63" }
-    //   } else if (scores[username] > 2) {
-    //     dynamicStyle = {"background-color":"#59c653", "color":"#fff" }
-    //   }
-    // }
-
-    console.log('PLAYER SCORE', scores)
     return (
       <Table striped bordered condensed hover>
         <tbody>
           <tr>
             {Object.keys(scores).map((username) =>
-              <td style={dynamicStyle}>
+
+              <td >
                 <p><Glyphicon glyph="glyphicon glyphicon-user" /> {username}</p>
                 <h2>{scores[username]}</h2>
               </td>
