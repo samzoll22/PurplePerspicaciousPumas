@@ -70,9 +70,17 @@ class UserProfile extends React.Component {
   render(){
   	return (
   	  <Col sm={6} smOffset={3}>
-        <Button id="return-to-lobby" bsSize="small" onClick={this.props.route.sendToLobby}>Return To Lobby</Button>
-  	    <Button onClick={this.handleClickAchievementTab}>Achievement</Button>
-  	    <Button onClick={this.handleClickGameStatisticsTab}>Game Statistics</Button>
+        <div>
+          <div>
+          <Button id="return-to-lobby" bsSize="small" onClick={this.props.route.sendToLobby}>Return To Lobby</Button>
+          </div>
+          <div>
+          <Button onClick={this.handleClickAchievementTab}>Achievement</Button>
+          </div>
+          <div>
+          <Button onClick={this.handleClickGameStatisticsTab}>Game Statistics</Button>
+          </div>
+        </div>
   	    {this.state.gameStatisticsTabActive && <GameStatisticsPane data={this.state.userDummy}/>}
   	    {this.state.achievementTabActive && <AchievementPane data={this.state.userDummy}/>}
   	  </Col>
