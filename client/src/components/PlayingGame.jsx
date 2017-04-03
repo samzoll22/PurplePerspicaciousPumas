@@ -85,7 +85,7 @@ class PlayingGame extends React.Component{
               bsStyle="info">
               <Well>
                 <p>Question {this.props.game.currentRound + 1}</p>
-                {stage !== -1 && <Prompt prompt={curPrompt}/>}
+                {stage !== -1 && <Prompt prompt={curPrompt} className="animated zoomInDown" />}
                 <Well>
                   {stage === -1 && this.state.role === 'judge' && <CreatePrompt handlePromptSubmission={this.props.handlePromptSubmission}/>}
                   {stage === -1 && this.state.role === 'player' && <JudgeCreatingPrompt judge={curJudge}/>}

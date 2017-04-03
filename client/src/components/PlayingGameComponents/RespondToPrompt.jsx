@@ -45,7 +45,7 @@ class RespondToPrompt extends React.Component {
       <Col id="submit-response">
           {!this.state.responded && responseForm}
           {this.state.responded &&
-            <div>
+            <div className="animated flip">
               <div style={{"font-weight":"3em", "font-size":"3em", "text-align":"center", "color":"#66ce42"}} >
                 <Glyphicon glyph="ok"/>
               </div>
