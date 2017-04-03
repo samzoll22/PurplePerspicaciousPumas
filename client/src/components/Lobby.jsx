@@ -28,7 +28,9 @@ class Lobby extends React.Component {
   componentDidMount() {
     this.getGames();
     this.getUsername();
+
   }
+
 
   getGames() {
     $.ajax({

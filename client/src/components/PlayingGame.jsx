@@ -79,6 +79,7 @@ class PlayingGame extends React.Component{
             <ProgressBar>
               <ProgressBar bsStyle="info" now={(this.props.game.currentRound + 1) * 25} label={"Question " + (this.props.game.currentRound + 1) + "/4"}/>
             </ProgressBar>
+
             <div>Question {this.props.game.currentRound + 1}</div>
             {stage !== -1 && <Prompt prompt={curPrompt}/>}
 
