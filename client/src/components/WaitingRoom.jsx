@@ -53,7 +53,7 @@ class WaitingRoom extends React.Component {
 
           // Call the 'jump' function when the spacekey is hit
           var spaceKey = game.input.keyboard.addKey(
-                          Phaser.Keyboard.SPACEBAR);
+                          Phaser.Keyboard.UP);
           spaceKey.onDown.add(this.jump, this);
 
           //create an empty group
