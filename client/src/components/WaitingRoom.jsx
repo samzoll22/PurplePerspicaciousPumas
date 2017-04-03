@@ -69,7 +69,14 @@ class WaitingRoom extends React.Component {
           </Col>
         </Well>
         <Well>
-          {this.props.seconds && <h4>Game starts in {this.props.seconds} seconds!</h4>}
+          {this.props.seconds &&
+            <div>
+              <h4>Game starts in {this.props.seconds} seconds!</h4>
+              <ProgressBar>
+                 <ProgressBar bsStyle="warning" active now={(6 - this.props.seconds) * 20} />
+              </ProgressBar>
+            </div>
+          }
 
           <h4>ONLINE PLAYERS</h4>
             <Well>

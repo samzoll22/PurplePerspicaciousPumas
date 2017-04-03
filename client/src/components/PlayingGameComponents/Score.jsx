@@ -31,7 +31,7 @@ class Score extends React.Component {
 
               <td >
                 <p><Glyphicon glyph="glyphicon glyphicon-user" /> {username}</p>
-                <h2>{scores[username]}</h2>
+                <p>{scores[username]}</p>
               </td>
             )}
           </tr>
