@@ -23,12 +23,10 @@ class RespondToPrompt extends React.Component {
   render() {
 
     const responseForm = (
-      <Form inline>
-        <FormGroup controlId="formInlineResponse" bsSize="large">
-          <FormControl type="text" placeholder="Your Response..." onChange={this.handleInputChange} value={this.state.response}/>
-        </FormGroup>
-        {' '}
-
+      <Form>
+      <FormGroup bsSize="large">
+        <FormControl type="text" placeholder="Your Response..." onChange={this.handleInputChange} value={this.state.response} />
+      </FormGroup>
         <div>
           <Button  onClick={() => {
             this.setState({responded: true});

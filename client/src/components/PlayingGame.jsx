@@ -64,7 +64,8 @@ class PlayingGame extends React.Component{
       <Col id="playing-game" sm={6} smOffset={3}>
         <Well >
           <Col >
-            <Panel header={
+            <Panel
+            header={
               <div>
                 <h2>{this.props.game.gameName}</h2>
                 <div>
@@ -74,22 +75,27 @@ class PlayingGame extends React.Component{
                   <ProgressBar bsStyle="info" now={(this.props.game.currentRound + 1) * 25} label={"Question " + (this.props.game.currentRound + 1) + "/4"}/>
                 </ProgressBar>
               </div>
-             } bsStyle="info">
-              {stage !== -1 && <Prompt prompt={curPrompt}/>}
-              <p>Question {this.props.game.currentRound + 1}</p>
+             }
+             footer={
+                <div>
+                  <p>Scoreboard</p>
+                  <Score game={this.props.game}/>
+                </div>
+              }
+              bsStyle="info">
               <Well>
-                {stage === -1 && this.state.role === 'judge' && <CreatePrompt handlePromptSubmission={this.props.handlePromptSubmission}/>}
-                {stage === -1 && this.state.role === 'player' && <JudgeCreatingPrompt judge={curJudge}/>}
-                {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
-                {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
-                {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
-                {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
-                {stage === 2 && <Winner responses={responses} winner={winner} secondsToRound={this.props.secondsToRound}/>}
+                <p>Question {this.props.game.currentRound + 1}</p>
+                {stage !== -1 && <Prompt prompt={curPrompt}/>}
+                <Well>
+                  {stage === -1 && this.state.role === 'judge' && <CreatePrompt handlePromptSubmission={this.props.handlePromptSubmission}/>}
+                  {stage === -1 && this.state.role === 'player' && <JudgeCreatingPrompt judge={curJudge}/>}
+                  {stage === 0 && this.state.role === 'judge' && <PlayersResponding />}
+                  {stage === 0 && this.state.role === 'player' && <RespondToPrompt handleResponse={this.props.handleResponse}/>}
+                  {stage === 1 && this.state.role === 'judge' && <ChooseWinner responses={responses} handleJudgeSelection={this.props.handleJudgeSelection}/>}
+                  {stage === 1 && this.state.role === 'player' && <SeeResponses responses={responses}/>}
+                  {stage === 2 && <Winner responses={responses} winner={winner} secondsToRound={this.props.secondsToRound}/>}
+                </Well>
               </Well>
-              <Panel footer={
-                <Score game={this.props.game}/>
-              }>
-              </Panel>
             </Panel>
           </Col>
         </Well>
