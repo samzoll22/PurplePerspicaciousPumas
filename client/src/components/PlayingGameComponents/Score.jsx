@@ -38,7 +38,7 @@ class Score extends React.Component {
     // return (
     //   <div id="score">
     //   <div><strong>Scores!</strong></div>
-    //   {Object.keys(scores).map((username) => 
+    //   {Object.keys(scores).map((username) =>
     //     <div> {username}: {scores[username]} </div>
     //     )}
     //   </div>

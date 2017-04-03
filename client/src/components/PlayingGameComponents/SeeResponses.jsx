@@ -6,7 +6,7 @@ const SeeResponses = (props) => (
   <ListGroup id="see-responses">
     <h4>Responses</h4>
   	{props.responses.map((response) => (
-			<ListGroupItem id="response-item"> 
+			<ListGroupItem id="response-item">
 			   <b>{response[1]}:</b> {response[0]}
 			</ListGroupItem>
 		))}
@@ -14,6 +14,6 @@ const SeeResponses = (props) => (
 )
 
 
-export default SeeResponses
+export default SeeResponses;
 
 // responsep1 is the person

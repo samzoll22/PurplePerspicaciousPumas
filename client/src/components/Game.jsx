@@ -19,6 +19,7 @@ class Game extends React.Component {
       game: null,
       username: null,
       seconds: null,
+      secondsToRound: null,
     };
 
 
@@ -27,7 +28,6 @@ class Game extends React.Component {
     this.handleResponse = this.handleResponse.bind(this);
     this.handlePromptSubmission = this.handlePromptSubmission.bind(this);
     this.handleJudgeSelection = this.handleJudgeSelection.bind(this);
-    this.handleReadyToMoveOn = this.handleReadyToMoveOn.bind(this);
 
     socket.on('update waiting room', (gameObj) => {
       this.setState({game: gameObj});
@@ -38,7 +38,6 @@ class Game extends React.Component {
     })
 
     socket.on('start game', (gameObj) => {
-      console.log('start game is called');
       this.setState({game: gameObj});
     })
 
@@ -51,24 +50,20 @@ class Game extends React.Component {
     socket.on('winner chosen', (gameObj) => {
       this.setState({game: gameObj});
     })
+    socket.on('countdown to next round', (secondsLeft) => {
+      this.setState({secondsToRound: secondsLeft})
+    })
     socket.on('start next round', (gameObj) => {
-      this.setState({game: gameObj});
+      this.setState({game: gameObj, secondsToRound: null});
     })
     socket.on('game over', (gameObj) => {
       this.setState({game: gameObj});
     })
     socket.on('disconnectTimeOut', () => {
-      // this function is related to the commented out function
-      // in server/index.js
-      console.log('disconnectTimeOut');
       this.props.route.sendToLobby.call(this, true);
     })
 
 
-  }
-
-  gameTransition(preGameObj) {
-    this.setState({pregame: preGameObj});
   }
 
   componentDidMount() {
@@ -114,11 +109,7 @@ class Game extends React.Component {
   }
 
   handleJudgeSelection(winner) {
-    socket.emit('judge selection', {gameName: this.props.params.gamename, winner: winner});
-  }
-
-  handleReadyToMoveOn() {
-    socket.emit('ready to move on', {gameName: this.props.params.gamename, username: this.state.username});
+    socket.emit('judge select and ready to move on', {gameName: this.props.params.gamename, winner: winner});
   }
 
   handlePromptSubmission(prompt) {
@@ -128,12 +119,12 @@ class Game extends React.Component {
 
 
   render() {
+
     return (
       <div id="game">
-
         {this.state.game && this.state.username && this.state.game.gameStage === 'waiting' && <WaitingRoom game={this.state.game} user={this.state.username} seconds={this.state.seconds} sendToLobby={this.props.route.sendToLobby} />}
 
-        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection} handleReadyToMoveOn={this.handleReadyToMoveOn}/>}
+        {this.state.game && this.state.username && this.state.game.gameStage === 'playing' && <PlayingGame game={this.state.game} user={this.state.username} secondsToRound={this.state.secondsToRound} handleResponse={this.handleResponse} handlePromptSubmission={this.handlePromptSubmission} handleJudgeSelection={this.handleJudgeSelection}/>}
 
         {this.state.game && this.state.username && this.state.game.gameStage === 'gameover' && <EndOfGame game={this.state.game} sendToLobby={this.props.route.sendToLobby}/>}
 
