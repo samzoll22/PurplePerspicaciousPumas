@@ -4,9 +4,10 @@
 
 ## Team
 
-- Scott Clendening
-- Paul Mills
-- Neil Ricci
+- Kevin
+- Allen
+- Chris
+- Sam
 
 ## Table of Contents
 
